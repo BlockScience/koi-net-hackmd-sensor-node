@@ -21,7 +21,7 @@ from koi_net.protocol.consts import (
     FETCH_BUNDLES_PATH
 )
 from .core import node
-from . import backfill
+from .backfill import backfill
 
 
 logger = logging.getLogger(__name__)
@@ -30,6 +30,9 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):    
     node.start()
+    asyncio.create_task(
+        backfill()
+    )
     
     yield
     node.stop()

@@ -1,4 +1,5 @@
 import logging
+import asyncio
 from rid_lib.ext import Bundle
 from rid_types import HackMDNote
 from . import hackmd_api
@@ -6,9 +7,8 @@ from .core import node
 
 logger = logging.getLogger(__name__)
 
-
-def run(team_path="blockscience"):
-    notes = hackmd_api.request(f"/teams/{team_path}/notes")
+async def backfill(team_path="blockscience"):
+    notes = await hackmd_api.async_request(f"/teams/{team_path}/notes")
     
     logger.info(f"Found {len(notes)} in team")
 
@@ -24,5 +24,7 @@ def run(team_path="blockscience"):
         
 if __name__ == "__main__":
     node.start()
-    run()
+    asyncio.run(
+        backfill()
+    )
     node.stop()
