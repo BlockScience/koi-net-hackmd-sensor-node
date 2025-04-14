@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 node = NodeInterface(
-    name="slack-sensor",
+    name="hackmd-sensor",
     profile=NodeProfile(
         base_url=URL,
         node_type=NodeType.FULL,

@@ -27,11 +27,16 @@ from .backfill import backfill
 logger = logging.getLogger(__name__)
 
 
+async def backfill_loop():
+    while True:
+        await backfill()
+        await asyncio.sleep(60)
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):    
     node.start()
     asyncio.create_task(
-        backfill()
+        backfill_loop()
     )
     
     yield
@@ -52,6 +57,7 @@ koi_net_router = APIRouter(
 def broadcast_events(req: EventsPayload):
     logger.info(f"Request to {BROADCAST_EVENTS_PATH}, received {len(req.events)} event(s)")
     for event in req.events:
+        logger.info(f"{event!r}")
         node.processor.handle(event=event, source=KnowledgeSource.External)
     
 

@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 async def backfill(team_path="blockscience"):
     notes = await hackmd_api.async_request(f"/teams/{team_path}/notes")
     
-    logger.info(f"Found {len(notes)} in team")
+    logger.debug(f"Found {len(notes)} in team")
 
     for note in notes:
         note_rid = HackMDNote(note["id"])

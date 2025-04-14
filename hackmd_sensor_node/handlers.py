@@ -1,4 +1,5 @@
 import logging
+from multiprocessing import process
 from koi_net.processor.handler import HandlerType, STOP_CHAIN
 from koi_net.processor.knowledge_object import KnowledgeSource, KnowledgeObject
 from koi_net.processor.interface import ProcessorInterface
@@ -28,8 +29,8 @@ def coordinator_contact(processor: ProcessorInterface, kobj: KnowledgeObject):
     if KoiNetNode not in node_profile.provides.event:
         return
     
-    logger.info("Identified a coordinator!")
-    logger.info("Proposing new edge")
+    logger.debug("Identified a coordinator!")
+    logger.debug("Proposing new edge")
     
     # queued for processing
     processor.handle(bundle=generate_edge_bundle(
@@ -39,44 +40,46 @@ def coordinator_contact(processor: ProcessorInterface, kobj: KnowledgeObject):
         rid_types=[KoiNetNode]
     ))
     
-    logger.info("Catching up on network state")
+    logger.debug("Catching up on network state")
     
-    payload = processor.network.request_handler.fetch_rids(kobj.rid, rid_types=[KoiNetNode])
-    for rid in payload.rids:
-        if rid == processor.identity.rid:
-            logger.info("Skipping myself")
-            continue
-        if processor.cache.exists(rid):
-            logger.info(f"Skipping known RID '{rid}'")
-            continue
+    rid_payload = processor.network.request_handler.fetch_rids(kobj.rid, rid_types=[KoiNetNode])
         
+    rids = [
+        rid for rid in rid_payload.rids 
+        if rid != processor.identity.rid and 
+        not processor.cache.exists(rid)
+    ]
+    
+    bundle_payload = processor.network.request_handler.fetch_bundles(kobj.rid, rids=rids)
+    
+    for bundle in bundle_payload.bundles:
         # marked as external since we are handling RIDs from another node
         # will fetch remotely instead of checking local cache
-        processor.handle(rid=rid, source=KnowledgeSource.External)
-    logger.info("Done")
+        processor.handle(bundle=bundle, source=KnowledgeSource.External)
+    logger.debug("Done")
 
 
 @node.processor.register_handler(HandlerType.Manifest)
 def custom_manifest_handler(processor: ProcessorInterface, kobj: KnowledgeObject):
     if type(kobj.rid) == HackMDNote:
-        logger.info("Skipping HackMD note manifest handling")
+        logger.debug("Skipping HackMD note manifest handling")
         return
     
     prev_bundle = processor.cache.read(kobj.rid)
 
     if prev_bundle:
         if kobj.manifest.sha256_hash == prev_bundle.manifest.sha256_hash:
-            logger.info("Hash of incoming manifest is same as existing knowledge, ignoring")
+            logger.debug("Hash of incoming manifest is same as existing knowledge, ignoring")
             return STOP_CHAIN
         if kobj.manifest.timestamp <= prev_bundle.manifest.timestamp:
-            logger.info("Timestamp of incoming manifest is the same or older than existing knowledge, ignoring")
+            logger.debug("Timestamp of incoming manifest is the same or older than existing knowledge, ignoring")
             return STOP_CHAIN
         
-        logger.info("RID previously known to me, labeling as 'UPDATE'")
+        logger.debug("RID previously known to me, labeling as 'UPDATE'")
         kobj.normalized_event_type = EventType.UPDATE
 
     else:
-        logger.info("RID previously unknown to me, labeling as 'NEW'")
+        logger.debug("RID previously unknown to me, labeling as 'NEW'")
         kobj.normalized_event_type = EventType.NEW
         
     return kobj
@@ -89,26 +92,29 @@ def custom_hackmd_bundle_handler(processor: ProcessorInterface, kobj: KnowledgeO
     prev_bundle = processor.cache.read(kobj.rid)
     
     if prev_bundle:
-        if prev_bundle.contents["lastChangedAt"] > kobj.contents["lastChangedAt"]:
-            logger.info("Incoming note has been changed more recently!")
+        prevChangedAt = prev_bundle.contents["lastChangedAt"]
+        currChangedAt = kobj.contents["lastChangedAt"]
+        logger.debug(f"Changed at {prevChangedAt} -> {currChangedAt}")
+        if currChangedAt > prevChangedAt:
+            logger.debug("Incoming note has been changed more recently!")
             kobj.normalized_event_type = EventType.UPDATE
             
         else:
-            logger.info("Incoming note is not newer")
+            logger.debug("Incoming note is not newer")
             return STOP_CHAIN
         
     else:
-        logger.info("Incoming note is previously unknown to me")
+        logger.debug("Incoming note is previously unknown to me")
         kobj.normalized_event_type = EventType.NEW
         
-    logger.info("Retrieving full note...")
+    logger.debug("Retrieving full note...")
     data = hackmd_api.request(f"/notes/{kobj.rid.note_id}")
     
     if not data:
-        logger.info("Failed.")
+        logger.debug("Failed.")
         return STOP_CHAIN
     
-    logger.info("Done.")
+    logger.debug("Done.")
     
     full_note_bundle = Bundle.generate(
         rid=kobj.rid,
