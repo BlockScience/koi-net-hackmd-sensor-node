@@ -30,7 +30,7 @@ logger = logging.getLogger(__name__)
 async def backfill_loop():
     while True:
         await backfill()
-        await asyncio.sleep(60)
+        await asyncio.sleep(600)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):    
