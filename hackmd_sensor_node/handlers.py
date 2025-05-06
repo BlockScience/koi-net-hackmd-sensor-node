@@ -1,5 +1,4 @@
 import logging
-from multiprocessing import process
 from koi_net.processor.handler import HandlerType, STOP_CHAIN
 from koi_net.processor.knowledge_object import KnowledgeSource, KnowledgeObject
 from koi_net.processor.interface import ProcessorInterface
