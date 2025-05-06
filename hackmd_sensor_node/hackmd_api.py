@@ -1,6 +1,6 @@
 import asyncio
 import httpx
-from .config import HACKMD_API_TOKEN
+from .core import node
 
 api_base_url = "https://api.hackmd.io/v1"
 
@@ -9,7 +9,7 @@ def request(path, method="GET"):
         method=method,
         url=api_base_url+path,
         headers={
-            "Authorization": "Bearer " + HACKMD_API_TOKEN
+            "Authorization": "Bearer " + node.config.env.hackmd_api_token
         }
     )
 
@@ -30,7 +30,7 @@ async def async_request(path, method="GET"):
                 method=method,
                 url=api_base_url+path,
                 headers={
-                    "Authorization": "Bearer " + HACKMD_API_TOKEN
+                    "Authorization": "Bearer " + node.config.env.hackmd_api_token
                 }
             )
         

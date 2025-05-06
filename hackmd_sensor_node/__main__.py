@@ -1,4 +1,8 @@
 import uvicorn
-from .config import HOST, PORT
+from .core import node
 
-uvicorn.run("hackmd_sensor_node.server:app", host=HOST, port=PORT, log_config=None)
+uvicorn.run(
+    "hackmd_sensor_node.server:app", 
+    host=node.config.server.host,
+    port=node.config.server.port, 
+)

@@ -1,12 +1,26 @@
-import os
-from dotenv import load_dotenv
+from pydantic import BaseModel, Field
+from koi_net.protocol.node import NodeProfile, NodeType, NodeProvides
+from koi_net.config import Config, EnvConfig, KoiNetConfig
+from rid_types import HackMDNote
 
-load_dotenv()
+class HackMDConfig(BaseModel):
+    team_path: str | None = "blockscience"
 
-HOST = "127.0.0.1"
-PORT = 8002
-URL = f"http://{HOST}:{PORT}/koi-net"
+class HackMDEnvConfig(EnvConfig):
+    hackmd_api_token: str | None = "HACKMD_API_TOKEN"
 
-FIRST_CONTACT = "http://127.0.0.1:8000/koi-net"
-
-HACKMD_API_TOKEN = os.environ["HACKMD_API_TOKEN"]
+class HackMDSensorNodeConfig(Config):
+    koi_net: KoiNetConfig | None = Field(default_factory = lambda: 
+        KoiNetConfig(
+            node_name="hackmd-sensor",
+            node_profile=NodeProfile(
+                node_type=NodeType.FULL,
+                provides=NodeProvides(
+                    event=[HackMDNote],
+                    state=[HackMDNote]
+                )
+            )
+        )
+    )
+    env: HackMDEnvConfig | None = Field(default_factory=HackMDEnvConfig)
+    hackmd: HackMDConfig | None = Field(default_factory=HackMDConfig)
