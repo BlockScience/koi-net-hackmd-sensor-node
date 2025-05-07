@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 from koi_net.protocol.node import NodeProfile, NodeType, NodeProvides
-from koi_net.config import Config, EnvConfig, KoiNetConfig
+from koi_net.config import NodeConfig, EnvConfig, KoiNetConfig
 from rid_types import HackMDNote
 
 class HackMDConfig(BaseModel):
@@ -9,7 +9,7 @@ class HackMDConfig(BaseModel):
 class HackMDEnvConfig(EnvConfig):
     hackmd_api_token: str | None = "HACKMD_API_TOKEN"
 
-class HackMDSensorNodeConfig(Config):
+class HackMDSensorNodeConfig(NodeConfig):
     koi_net: KoiNetConfig | None = Field(default_factory = lambda: 
         KoiNetConfig(
             node_name="hackmd-sensor",
