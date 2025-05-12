@@ -3,12 +3,12 @@ from koi_net import NodeInterface
 from koi_net.processor.default_handlers import (
     basic_rid_handler,
     edge_negotiation_handler,
-    basic_network_output_filter
+    basic_network_output_filter,
+    basic_manifest_handler # Add this import
 )
 from .config import HackMDSensorNodeConfig
 
 logger = logging.getLogger(__name__)
-
 
 node = NodeInterface(
     config=HackMDSensorNodeConfig.load_from_yaml("config.yaml"),
@@ -16,8 +16,7 @@ node = NodeInterface(
     handlers=[
         basic_rid_handler,
         edge_negotiation_handler,
-        basic_network_output_filter
+        basic_network_output_filter,
+        basic_manifest_handler,
     ]
 )
-
-from . import handlers
