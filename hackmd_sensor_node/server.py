@@ -59,13 +59,13 @@ async def lifespan(app: FastAPI):
     try:
         node.start()
         logger.info(f"KOI-net node {node.identity.rid} started.")
-        
+
         # Network initialization sequence
         logger.info("NETWORK SETUP: Beginning network initialization sequence...")
-        
+
         # Wait a moment before initializing connections
         await asyncio.sleep(1)
-        
+
         # Explicitly initiate coordinator contact if configured
         if hasattr(node.config.koi_net, 'first_contact') and node.config.koi_net.first_contact:
             logger.info(f"NETWORK SETUP: Initiating first contact with coordinator: {node.config.koi_net.first_contact}")
@@ -87,22 +87,22 @@ async def lifespan(app: FastAPI):
                             retry_delay *= 2
                         else:
                             logger.error(f"NETWORK SETUP: Failed to fetch coordinator after {attempt} attempts: {e}")
-                
+
                 if coordinator_bundles.bundles:
                     coordinator_bundle = coordinator_bundles.bundles[0]
                     logger.info(f"NETWORK SETUP: Received coordinator bundle: {coordinator_bundle.rid}. Queueing for processing.")
                     node.processor.handle(
-                        bundle=coordinator_bundle, 
+                        bundle=coordinator_bundle,
                         source=KnowledgeSource.External
                     )
-                    
+
                     # Give some time for the network to establish
                     await asyncio.sleep(2)
-                    
+
                     # Log network state
                     known_nodes = node.network.graph.list_nodes()
                     logger.info(f"NETWORK SETUP: Known nodes after initialization: {known_nodes}")
-                    
+
                     current_edges = node.network.graph.list_edges()
                     logger.info(f"NETWORK SETUP: Current edges after initialization: {current_edges}")
                 else:
@@ -111,7 +111,7 @@ async def lifespan(app: FastAPI):
                 logger.error(f"NETWORK SETUP: Error during network initialization: {e}")
                 import traceback
                 logger.debug(traceback.format_exc())
-            
+
             logger.info("NETWORK SETUP: Network initialization complete")
 
         # Initial backfill on startup (optional)
@@ -141,10 +141,15 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    lifespan=lifespan, 
+    lifespan=lifespan,
     title="KOI-net Protocol API",
     version="1.0.0"
 )
+
+@app.get("/health", tags=["System"])
+async def health_check():
+    """Basic health check for the service."""
+    return {"status": "healthy", "node_id": str(node.identity.rid) if node.identity else "uninitialized"}
 
 
 koi_net_router = APIRouter(
@@ -157,7 +162,7 @@ def broadcast_events(req: EventsPayload):
     for event in req.events:
         logger.info(f"{event!r}")
         node.processor.handle(event=event, source=KnowledgeSource.External)
-    
+
 
 @koi_net_router.post(POLL_EVENTS_PATH)
 def poll_events(req: PollEvents) -> EventsPayload:
@@ -177,10 +182,4 @@ def fetch_manifests(req: FetchManifests) -> ManifestsPayload:
 def fetch_bundles(req: FetchBundles) -> BundlesPayload:
     return node.network.response_handler.fetch_bundles(req)
 
-
 app.include_router(koi_net_router)
-
-@app.get("/health", tags=["System"])
-async def health_check():
-    """Basic health check for the service."""
-    return {"status": "healthy", "node_id": str(node.identity.rid) if node.identity else "uninitialized"}
