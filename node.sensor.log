@@ -1,212 +1,146 @@
-2025-05-12 14:30:36 - root - INFO - Logging initialized for HackMD Sensor Node. Level: DEBUG.
-2025-05-12 14:30:37 - __main__ - INFO - Starting HackMD sensor node server on 127.0.0.1:8001
-2025-05-12 14:30:37 - asyncio - DEBUG - Using selector: KqueueSelector
-2025-05-12 14:30:37 - uvicorn.error - INFO - Started server process [96599]
-2025-05-12 14:30:37 - uvicorn.error - INFO - Waiting for application startup.
-2025-05-12 14:30:37 - hackmd_sensor_node.server - INFO - HackMD Sensor Node: FastAPI application startup...
-2025-05-12 14:30:37 - koi_net.core - INFO - Starting processor worker thread
-2025-05-12 14:30:37 - koi_net.network.graph - DEBUG - Generating network graph
-2025-05-12 14:30:37 - koi_net.network.graph - DEBUG - Done
-2025-05-12 14:30:37 - koi_net.processor.interface - DEBUG - Queued <KObj 'orn:koi-net.node:hackmd-sensor+c1311da2-023f-4ce5-a262-6b9a6db85dea' event type: 'None' -> 'None', source: 'INTERNAL'>
-2025-05-12 14:30:37 - koi_net.processor.interface - DEBUG - Dequeued <KObj 'orn:koi-net.node:hackmd-sensor+c1311da2-023f-4ce5-a262-6b9a6db85dea' event type: 'None' -> 'None', source: 'INTERNAL'>
-2025-05-12 14:30:37 - koi_net.core - DEBUG - Waiting for kobj queue to empty
-2025-05-12 14:30:37 - koi_net.processor.interface - DEBUG - Handling <KObj 'orn:koi-net.node:hackmd-sensor+c1311da2-023f-4ce5-a262-6b9a6db85dea' event type: 'None' -> 'None', source: 'INTERNAL'>
-2025-05-12 14:30:37 - koi_net.processor.interface - DEBUG - Calling rid handler 'basic_rid_handler'
-2025-05-12 14:30:37 - koi_net.processor.interface - DEBUG - Calling manifest handler 'basic_manifest_handler'
-2025-05-12 14:30:37 - koi_net.processor.default_handlers - DEBUG - RID previously unknown to me, labeling as 'NEW'
-2025-05-12 14:30:37 - koi_net.processor.interface - DEBUG - Knowledge object modified by basic_manifest_handler
-2025-05-12 14:30:37 - koi_net.processor.interface - INFO - Writing to cache: <KObj 'orn:koi-net.node:hackmd-sensor+c1311da2-023f-4ce5-a262-6b9a6db85dea' event type: 'None' -> 'NEW', source: 'INTERNAL'>
-2025-05-12 14:30:37 - koi_net.processor.interface - DEBUG - Change to node or edge, regenerating network graph
-2025-05-12 14:30:37 - koi_net.network.graph - DEBUG - Generating network graph
-2025-05-12 14:30:37 - koi_net.network.graph - DEBUG - Added node orn:koi-net.node:hackmd-sensor+c1311da2-023f-4ce5-a262-6b9a6db85dea
-2025-05-12 14:30:37 - koi_net.network.graph - DEBUG - Done
-2025-05-12 14:30:37 - koi_net.processor.interface - DEBUG - Calling network handler 'basic_network_output_filter'
-2025-05-12 14:30:37 - koi_net.processor.default_handlers - DEBUG - Updating network targets with 'orn:koi-net.node' subscribers: []
-2025-05-12 14:30:37 - koi_net.processor.interface - DEBUG - Knowledge object modified by basic_network_output_filter
-2025-05-12 14:30:37 - koi_net.processor.interface - DEBUG - No network targets set
-2025-05-12 14:30:37 - koi_net.processor.interface - DEBUG - Done
-2025-05-12 14:30:37 - koi_net.core - DEBUG - Done
-2025-05-12 14:30:37 - koi_net.core - DEBUG - I don't have any neighbors, reaching out to first contact http://127.0.0.1:8000/koi-net
-2025-05-12 14:30:37 - koi_net.network.request_handler - DEBUG - Making request to http://127.0.0.1:8000/koi-net/events/broadcast
-2025-05-12 14:30:37 - httpcore.connection - DEBUG - connect_tcp.started host='127.0.0.1' port=8000 local_address=None timeout=5.0 socket_options=None
-2025-05-12 14:30:37 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x107a7d400>
-2025-05-12 14:30:37 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-05-12 14:30:37 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-05-12 14:30:37 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-05-12 14:30:37 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-05-12 14:30:37 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-05-12 14:30:37 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Mon, 12 May 2025 19:30:37 GMT'), (b'server', b'uvicorn'), (b'content-length', b'4'), (b'content-type', b'application/json')])
-2025-05-12 14:30:37 - httpx - INFO - HTTP Request: POST http://127.0.0.1:8000/koi-net/events/broadcast "HTTP/1.1 200 OK"
-2025-05-12 14:30:37 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-05-12 14:30:37 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-05-12 14:30:37 - httpcore.http11 - DEBUG - response_closed.started
-2025-05-12 14:30:37 - httpcore.http11 - DEBUG - response_closed.complete
-2025-05-12 14:30:37 - httpcore.connection - DEBUG - close.started
-2025-05-12 14:30:37 - httpcore.connection - DEBUG - close.complete
-2025-05-12 14:30:37 - koi_net.network.request_handler - INFO - Broadcasted 2 event(s) to 'http://127.0.0.1:8000/koi-net'
-2025-05-12 14:30:37 - hackmd_sensor_node.server - INFO - KOI-net node orn:koi-net.node:hackmd-sensor+c1311da2-023f-4ce5-a262-6b9a6db85dea started.
-2025-05-12 14:30:37 - hackmd_sensor_node.server - INFO - NETWORK SETUP: Beginning network initialization sequence...
-2025-05-12 14:30:38 - hackmd_sensor_node.server - INFO - NETWORK SETUP: Initiating first contact with coordinator: http://127.0.0.1:8000/koi-net
-2025-05-12 14:30:38 - koi_net.network.request_handler - DEBUG - Making request to http://127.0.0.1:8000/koi-net/bundles/fetch
-2025-05-12 14:30:38 - httpcore.connection - DEBUG - connect_tcp.started host='127.0.0.1' port=8000 local_address=None timeout=5.0 socket_options=None
-2025-05-12 14:30:38 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x107a12d50>
-2025-05-12 14:30:38 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
-2025-05-12 14:30:38 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-05-12 14:30:38 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
-2025-05-12 14:30:38 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-05-12 14:30:38 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
-2025-05-12 14:30:38 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Mon, 12 May 2025 19:30:38 GMT'), (b'server', b'uvicorn'), (b'content-length', b'110'), (b'content-type', b'application/json')])
-2025-05-12 14:30:38 - httpx - INFO - HTTP Request: POST http://127.0.0.1:8000/koi-net/bundles/fetch "HTTP/1.1 200 OK"
-2025-05-12 14:30:38 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
-2025-05-12 14:30:38 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-05-12 14:30:38 - httpcore.http11 - DEBUG - response_closed.started
-2025-05-12 14:30:38 - httpcore.http11 - DEBUG - response_closed.complete
-2025-05-12 14:30:38 - httpcore.connection - DEBUG - close.started
-2025-05-12 14:30:38 - httpcore.connection - DEBUG - close.complete
-2025-05-12 14:30:38 - koi_net.network.request_handler - INFO - Fetched 0 bundle(s) from 'http://127.0.0.1:8000/koi-net'
-2025-05-12 14:30:38 - hackmd_sensor_node.server - WARNING - NETWORK SETUP: Could not fetch coordinator bundle
-2025-05-12 14:30:38 - hackmd_sensor_node.server - INFO - NETWORK SETUP: Network initialization complete
-2025-05-12 14:30:38 - hackmd_sensor_node.server - INFO - Performing initial HackMD backfill on startup...
-2025-05-12 14:30:38 - hackmd_sensor_node.config - INFO - HackMD state file '.koi/hackmd/hackmd_state.json' not found. Starting empty.
-2025-05-12 14:30:38 - hackmd_sensor_node.backfill - INFO - Starting HackMD backfill.
-2025-05-12 14:30:38 - hackmd_sensor_node.backfill - INFO - Targeting specific HackMD notes for backfill: ['C1xso4C8SH-ZzDaloTq4Uw']
-2025-05-12 14:30:38 - hackmd_sensor_node.backfill - DEBUG - Fetching targeted note ID: C1xso4C8SH-ZzDaloTq4Uw
-2025-05-12 14:30:38 - httpcore.connection - DEBUG - connect_tcp.started host='api.hackmd.io' port=443 local_address=None timeout=5.0 socket_options=None
-2025-05-12 14:30:39 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x107aac690>
-2025-05-12 14:30:39 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x107a59400> server_hostname='api.hackmd.io' timeout=5.0
-2025-05-12 14:30:39 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x107aa5940>
-2025-05-12 14:30:39 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'GET']>
-2025-05-12 14:30:39 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-05-12 14:30:39 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'GET']>
-2025-05-12 14:30:39 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-05-12 14:30:39 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
-2025-05-12 14:30:40 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 12 May 2025 19:30:40 GMT'), (b'Content-Type', b'application/json; charset=utf-8'), (b'Content-Length', b'19303'), (b'Connection', b'keep-alive'), (b'X-Powered-By', b'Express'), (b'Content-Language', b'dev'), (b'Set-Cookie', b'locale=dev; path=/; expires=Tue, 12 May 2026 19:30:40 GMT'), (b'X-HackMD-API-Version', b'1.0.0'), (b'X-RateLimit-UserLimit', b'2000'), (b'X-RateLimit-UserRemaining', b'1541'), (b'X-RateLimit-UserReset', b'1748735999999'), (b'X-Target-Scope', b'user'), (b'X-Target-Id', b'36c0c87e-77a1-4950-b6a5-b58b44164c3f'), (b'ETag', b'W/"4b67-ozqN1ldmz845iesIjYSqFboo/O8"')])
-2025-05-12 14:30:40 - httpx - INFO - HTTP Request: GET https://api.hackmd.io/v1/notes/C1xso4C8SH-ZzDaloTq4Uw "HTTP/1.1 200 OK"
-2025-05-12 14:30:40 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'GET']>
-2025-05-12 14:30:40 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-05-12 14:30:40 - httpcore.http11 - DEBUG - response_closed.started
-2025-05-12 14:30:40 - httpcore.http11 - DEBUG - response_closed.complete
-2025-05-12 14:30:40 - httpcore.connection - DEBUG - close.started
-2025-05-12 14:30:40 - httpcore.connection - DEBUG - close.complete
-2025-05-12 14:30:40 - hackmd_sensor_node.backfill - INFO - Processing targeted note 'Working Concept — “Net-of-Nets” Model v0.4-r2' (ID: C1xso4C8SH-ZzDaloTq4Uw) - New or updated.
-2025-05-12 14:30:40 - hackmd_sensor_node.backfill - DEBUG - Making backfill targeted note bundle orn:hackmd.note:C1xso4C8SH-ZzDaloTq4Uw available locally.
-2025-05-12 14:30:40 - koi_net.processor.interface - DEBUG - Queued <KObj 'orn:hackmd.note:C1xso4C8SH-ZzDaloTq4Uw' event type: 'None' -> 'None', source: 'INTERNAL'>
-2025-05-12 14:30:40 - koi_net.processor.interface - DEBUG - Dequeued <KObj 'orn:hackmd.note:C1xso4C8SH-ZzDaloTq4Uw' event type: 'None' -> 'None', source: 'INTERNAL'>
-2025-05-12 14:30:40 - hackmd_sensor_node.backfill - INFO - HackMD backfill complete. Processed 1 notes, bundled 1 new/updated notes.
-2025-05-12 14:30:40 - koi_net.processor.interface - DEBUG - Handling <KObj 'orn:hackmd.note:C1xso4C8SH-ZzDaloTq4Uw' event type: 'None' -> 'None', source: 'INTERNAL'>
-2025-05-12 14:30:40 - koi_net.processor.interface - DEBUG - Calling rid handler 'basic_rid_handler'
-2025-05-12 14:30:40 - koi_net.processor.interface - DEBUG - Calling manifest handler 'basic_manifest_handler'
-2025-05-12 14:30:40 - koi_net.processor.default_handlers - DEBUG - RID previously unknown to me, labeling as 'NEW'
-2025-05-12 14:30:40 - hackmd_sensor_node.config - DEBUG - Saved HackMD state to '.koi/hackmd/hackmd_state.json'.
-2025-05-12 14:30:40 - koi_net.processor.interface - DEBUG - Knowledge object modified by basic_manifest_handler
-2025-05-12 14:30:40 - hackmd_sensor_node.server - INFO - Initial HackMD backfill completed.
-2025-05-12 14:30:40 - koi_net.processor.interface - INFO - Writing to cache: <KObj 'orn:hackmd.note:C1xso4C8SH-ZzDaloTq4Uw' event type: 'None' -> 'NEW', source: 'INTERNAL'>
-2025-05-12 14:30:40 - hackmd_sensor_node.server - INFO - HackMD backfill loop starting. Interval: 600 seconds.
-2025-05-12 14:30:40 - hackmd_sensor_node.config - INFO - Loaded HackMD state from '.koi/hackmd/hackmd_state.json': 1 notes tracked.
-2025-05-12 14:30:40 - hackmd_sensor_node.server - INFO - Starting periodic HackMD backfill...
-2025-05-12 14:30:40 - koi_net.processor.interface - DEBUG - Calling network handler 'basic_network_output_filter'
-2025-05-12 14:30:40 - hackmd_sensor_node.backfill - INFO - Starting HackMD backfill.
-2025-05-12 14:30:40 - koi_net.processor.default_handlers - DEBUG - Updating network targets with 'orn:hackmd.note' subscribers: []
-2025-05-12 14:30:40 - hackmd_sensor_node.backfill - INFO - Targeting specific HackMD notes for backfill: ['C1xso4C8SH-ZzDaloTq4Uw']
-2025-05-12 14:30:40 - koi_net.processor.interface - DEBUG - Knowledge object modified by basic_network_output_filter
-2025-05-12 14:30:40 - hackmd_sensor_node.backfill - DEBUG - Fetching targeted note ID: C1xso4C8SH-ZzDaloTq4Uw
-2025-05-12 14:30:40 - koi_net.processor.interface - DEBUG - No network targets set
-2025-05-12 14:30:40 - koi_net.processor.interface - DEBUG - Done
-2025-05-12 14:30:40 - httpcore.connection - DEBUG - connect_tcp.started host='api.hackmd.io' port=443 local_address=None timeout=5.0 socket_options=None
-2025-05-12 14:30:40 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x107ad4d60>
-2025-05-12 14:30:40 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x107a597f0> server_hostname='api.hackmd.io' timeout=5.0
-2025-05-12 14:30:41 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1079f3d10>
-2025-05-12 14:30:41 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'GET']>
-2025-05-12 14:30:41 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-05-12 14:30:41 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'GET']>
-2025-05-12 14:30:41 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-05-12 14:30:41 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
-2025-05-12 14:30:41 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 12 May 2025 19:30:41 GMT'), (b'Content-Type', b'application/json; charset=utf-8'), (b'Content-Length', b'19303'), (b'Connection', b'keep-alive'), (b'X-Powered-By', b'Express'), (b'Content-Language', b'dev'), (b'Set-Cookie', b'locale=dev; path=/; expires=Tue, 12 May 2026 19:30:41 GMT'), (b'X-HackMD-API-Version', b'1.0.0'), (b'X-RateLimit-UserLimit', b'2000'), (b'X-RateLimit-UserRemaining', b'1540'), (b'X-RateLimit-UserReset', b'1748735999999'), (b'X-Target-Scope', b'user'), (b'X-Target-Id', b'36c0c87e-77a1-4950-b6a5-b58b44164c3f'), (b'ETag', b'W/"4b67-ozqN1ldmz845iesIjYSqFboo/O8"')])
-2025-05-12 14:30:41 - httpx - INFO - HTTP Request: GET https://api.hackmd.io/v1/notes/C1xso4C8SH-ZzDaloTq4Uw "HTTP/1.1 200 OK"
-2025-05-12 14:30:41 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'GET']>
-2025-05-12 14:30:41 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-05-12 14:30:41 - httpcore.http11 - DEBUG - response_closed.started
-2025-05-12 14:30:41 - httpcore.http11 - DEBUG - response_closed.complete
-2025-05-12 14:30:41 - httpcore.connection - DEBUG - close.started
-2025-05-12 14:30:41 - httpcore.connection - DEBUG - close.complete
-2025-05-12 14:30:41 - hackmd_sensor_node.backfill - DEBUG - Skipping targeted note 'Working Concept — “Net-of-Nets” Model v0.4-r2' (ID: C1xso4C8SH-ZzDaloTq4Uw) - Already up-to-date.
-2025-05-12 14:30:41 - hackmd_sensor_node.backfill - INFO - HackMD backfill complete. Processed 1 notes, bundled 0 new/updated notes.
-2025-05-12 14:30:41 - hackmd_sensor_node.config - DEBUG - Saved HackMD state to '.koi/hackmd/hackmd_state.json'.
-2025-05-12 14:30:41 - hackmd_sensor_node.server - INFO - Periodic HackMD backfill completed.
-2025-05-12 14:30:41 - uvicorn.error - INFO - Application startup complete.
-2025-05-12 14:30:41 - uvicorn.error - INFO - Uvicorn running on http://127.0.0.1:8001 (Press CTRL+C to quit)
-2025-05-12 14:30:52 - koi_net.network.response_handler - INFO - Request to fetch rids, allowed types [<RIDType 'orn:hackmd.note'>]
-2025-05-12 14:30:52 - uvicorn.access - INFO - 127.0.0.1:60876 - "POST /koi-net/rids/fetch HTTP/1.1" 200
-2025-05-12 14:30:52 - koi_net.network.response_handler - INFO - Request to fetch bundles, requested rids [<RID 'orn:hackmd.note:C1xso4C8SH-ZzDaloTq4Uw'>]
-2025-05-12 14:30:52 - uvicorn.access - INFO - 127.0.0.1:60877 - "POST /koi-net/bundles/fetch HTTP/1.1" 200
-2025-05-12 14:30:52 - hackmd_sensor_node.server - INFO - Request to /events/broadcast, received 1 event(s)
-2025-05-12 14:30:52 - hackmd_sensor_node.server - INFO - <Event 'orn:koi-net.edge:5552ca830057a403169a57c44b8f68a5b6f033f4971568674df89f875a0a9d5d' event type: 'NEW'>
-2025-05-12 14:30:52 - koi_net.processor.interface - DEBUG - Queued <KObj 'orn:koi-net.edge:5552ca830057a403169a57c44b8f68a5b6f033f4971568674df89f875a0a9d5d' event type: 'NEW' -> 'None', source: 'EXTERNAL'>
-2025-05-12 14:30:52 - koi_net.processor.interface - DEBUG - Dequeued <KObj 'orn:koi-net.edge:5552ca830057a403169a57c44b8f68a5b6f033f4971568674df89f875a0a9d5d' event type: 'NEW' -> 'None', source: 'EXTERNAL'>
-2025-05-12 14:30:52 - koi_net.processor.interface - DEBUG - Handling <KObj 'orn:koi-net.edge:5552ca830057a403169a57c44b8f68a5b6f033f4971568674df89f875a0a9d5d' event type: 'NEW' -> 'None', source: 'EXTERNAL'>
-2025-05-12 14:30:52 - uvicorn.access - INFO - 127.0.0.1:60878 - "POST /koi-net/events/broadcast HTTP/1.1" 200
-2025-05-12 14:30:52 - koi_net.processor.interface - DEBUG - Calling rid handler 'basic_rid_handler'
-2025-05-12 14:30:52 - koi_net.processor.interface - DEBUG - Calling manifest handler 'basic_manifest_handler'
-2025-05-12 14:30:52 - koi_net.processor.default_handlers - DEBUG - RID previously unknown to me, labeling as 'NEW'
-2025-05-12 14:30:52 - koi_net.processor.interface - DEBUG - Knowledge object modified by basic_manifest_handler
-2025-05-12 14:30:52 - koi_net.processor.interface - DEBUG - Calling bundle handler 'edge_negotiation_handler'
-2025-05-12 14:30:52 - koi_net.processor.interface - INFO - Writing to cache: <KObj 'orn:koi-net.edge:5552ca830057a403169a57c44b8f68a5b6f033f4971568674df89f875a0a9d5d' event type: 'NEW' -> 'NEW', source: 'EXTERNAL'>
-2025-05-12 14:30:52 - koi_net.processor.interface - DEBUG - Change to node or edge, regenerating network graph
-2025-05-12 14:30:52 - koi_net.network.graph - DEBUG - Generating network graph
-2025-05-12 14:30:52 - koi_net.network.graph - DEBUG - Added node orn:koi-net.node:hackmd-sensor+c1311da2-023f-4ce5-a262-6b9a6db85dea
-2025-05-12 14:30:52 - koi_net.network.graph - DEBUG - Added edge orn:koi-net.edge:5552ca830057a403169a57c44b8f68a5b6f033f4971568674df89f875a0a9d5d (orn:koi-net.node:hackmd-processor+62eabec3-ed43-4122-94cc-ea7aa8701fde -> orn:koi-net.node:hackmd-sensor+c1311da2-023f-4ce5-a262-6b9a6db85dea)
-2025-05-12 14:30:52 - koi_net.network.graph - DEBUG - Done
-2025-05-12 14:30:52 - koi_net.processor.interface - DEBUG - Calling network handler 'basic_network_output_filter'
-2025-05-12 14:30:52 - koi_net.processor.interface - DEBUG - Knowledge object modified by basic_network_output_filter
-2025-05-12 14:30:52 - koi_net.processor.interface - DEBUG - No network targets set
-2025-05-12 14:30:52 - koi_net.processor.interface - DEBUG - Done
-2025-05-12 14:40:41 - hackmd_sensor_node.server - INFO - Starting periodic HackMD backfill...
-2025-05-12 14:40:41 - hackmd_sensor_node.backfill - INFO - Starting HackMD backfill.
-2025-05-12 14:40:41 - hackmd_sensor_node.backfill - INFO - Targeting specific HackMD notes for backfill: ['C1xso4C8SH-ZzDaloTq4Uw']
-2025-05-12 14:40:41 - hackmd_sensor_node.backfill - DEBUG - Fetching targeted note ID: C1xso4C8SH-ZzDaloTq4Uw
-2025-05-12 14:40:41 - httpcore.connection - DEBUG - connect_tcp.started host='api.hackmd.io' port=443 local_address=None timeout=5.0 socket_options=None
-2025-05-12 14:40:41 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1079ef680>
-2025-05-12 14:40:41 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10792a3c0> server_hostname='api.hackmd.io' timeout=5.0
-2025-05-12 14:40:42 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1079ef790>
-2025-05-12 14:40:42 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'GET']>
-2025-05-12 14:40:42 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-05-12 14:40:42 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'GET']>
-2025-05-12 14:40:42 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-05-12 14:40:42 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
-2025-05-12 14:40:43 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 12 May 2025 19:40:43 GMT'), (b'Content-Type', b'application/json; charset=utf-8'), (b'Content-Length', b'19303'), (b'Connection', b'keep-alive'), (b'X-Powered-By', b'Express'), (b'Content-Language', b'dev'), (b'Set-Cookie', b'locale=dev; path=/; expires=Tue, 12 May 2026 19:40:42 GMT'), (b'X-HackMD-API-Version', b'1.0.0'), (b'X-RateLimit-UserLimit', b'2000'), (b'X-RateLimit-UserRemaining', b'1539'), (b'X-RateLimit-UserReset', b'1748735999999'), (b'X-Target-Scope', b'user'), (b'X-Target-Id', b'36c0c87e-77a1-4950-b6a5-b58b44164c3f'), (b'ETag', b'W/"4b67-ozqN1ldmz845iesIjYSqFboo/O8"')])
-2025-05-12 14:40:43 - httpx - INFO - HTTP Request: GET https://api.hackmd.io/v1/notes/C1xso4C8SH-ZzDaloTq4Uw "HTTP/1.1 200 OK"
-2025-05-12 14:40:43 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'GET']>
-2025-05-12 14:40:43 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-05-12 14:40:43 - httpcore.http11 - DEBUG - response_closed.started
-2025-05-12 14:40:43 - httpcore.http11 - DEBUG - response_closed.complete
-2025-05-12 14:40:43 - httpcore.connection - DEBUG - close.started
-2025-05-12 14:40:43 - httpcore.connection - DEBUG - close.complete
-2025-05-12 14:40:43 - hackmd_sensor_node.backfill - DEBUG - Skipping targeted note 'Working Concept — “Net-of-Nets” Model v0.4-r2' (ID: C1xso4C8SH-ZzDaloTq4Uw) - Already up-to-date.
-2025-05-12 14:40:43 - hackmd_sensor_node.backfill - INFO - HackMD backfill complete. Processed 1 notes, bundled 0 new/updated notes.
-2025-05-12 14:40:43 - hackmd_sensor_node.config - DEBUG - Saved HackMD state to '.koi/hackmd/hackmd_state.json'.
-2025-05-12 14:40:43 - hackmd_sensor_node.server - INFO - Periodic HackMD backfill completed.
-2025-05-12 14:50:43 - hackmd_sensor_node.server - INFO - Starting periodic HackMD backfill...
-2025-05-12 14:50:43 - hackmd_sensor_node.backfill - INFO - Starting HackMD backfill.
-2025-05-12 14:50:43 - hackmd_sensor_node.backfill - INFO - Targeting specific HackMD notes for backfill: ['C1xso4C8SH-ZzDaloTq4Uw']
-2025-05-12 14:50:43 - hackmd_sensor_node.backfill - DEBUG - Fetching targeted note ID: C1xso4C8SH-ZzDaloTq4Uw
-2025-05-12 14:50:43 - httpcore.connection - DEBUG - connect_tcp.started host='api.hackmd.io' port=443 local_address=None timeout=5.0 socket_options=None
-2025-05-12 14:50:43 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x107a85450>
-2025-05-12 14:50:43 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x107a5a060> server_hostname='api.hackmd.io' timeout=5.0
-2025-05-12 14:50:44 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x107a85250>
-2025-05-12 14:50:44 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'GET']>
-2025-05-12 14:50:44 - httpcore.http11 - DEBUG - send_request_headers.complete
-2025-05-12 14:50:44 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'GET']>
-2025-05-12 14:50:44 - httpcore.http11 - DEBUG - send_request_body.complete
-2025-05-12 14:50:44 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
-2025-05-12 14:50:44 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 12 May 2025 19:50:44 GMT'), (b'Content-Type', b'application/json; charset=utf-8'), (b'Content-Length', b'19303'), (b'Connection', b'keep-alive'), (b'X-Powered-By', b'Express'), (b'Content-Language', b'dev'), (b'Set-Cookie', b'locale=dev; path=/; expires=Tue, 12 May 2026 19:50:44 GMT'), (b'X-HackMD-API-Version', b'1.0.0'), (b'X-RateLimit-UserLimit', b'2000'), (b'X-RateLimit-UserRemaining', b'1538'), (b'X-RateLimit-UserReset', b'1748735999999'), (b'X-Target-Scope', b'user'), (b'X-Target-Id', b'36c0c87e-77a1-4950-b6a5-b58b44164c3f'), (b'ETag', b'W/"4b67-ozqN1ldmz845iesIjYSqFboo/O8"')])
-2025-05-12 14:50:44 - httpx - INFO - HTTP Request: GET https://api.hackmd.io/v1/notes/C1xso4C8SH-ZzDaloTq4Uw "HTTP/1.1 200 OK"
-2025-05-12 14:50:44 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'GET']>
-2025-05-12 14:50:44 - httpcore.http11 - DEBUG - receive_response_body.complete
-2025-05-12 14:50:44 - httpcore.http11 - DEBUG - response_closed.started
-2025-05-12 14:50:44 - httpcore.http11 - DEBUG - response_closed.complete
-2025-05-12 14:50:44 - httpcore.connection - DEBUG - close.started
-2025-05-12 14:50:44 - httpcore.connection - DEBUG - close.complete
-2025-05-12 14:50:44 - hackmd_sensor_node.backfill - DEBUG - Skipping targeted note 'Working Concept — “Net-of-Nets” Model v0.4-r2' (ID: C1xso4C8SH-ZzDaloTq4Uw) - Already up-to-date.
-2025-05-12 14:50:44 - hackmd_sensor_node.backfill - INFO - HackMD backfill complete. Processed 1 notes, bundled 0 new/updated notes.
-2025-05-12 14:50:44 - hackmd_sensor_node.config - DEBUG - Saved HackMD state to '.koi/hackmd/hackmd_state.json'.
-2025-05-12 14:50:44 - hackmd_sensor_node.server - INFO - Periodic HackMD backfill completed.
+2025-05-12 23:35:12 - root - INFO - Logging initialized for HackMD Sensor Node. Level: DEBUG.
+2025-05-12 23:35:13 - __main__ - INFO - Starting HackMD sensor node server on 127.0.0.1:8002
+2025-05-12 23:35:13 - asyncio - DEBUG - Using selector: KqueueSelector
+2025-05-12 23:35:13 - uvicorn.error - INFO - Started server process [94462]
+2025-05-12 23:35:13 - uvicorn.error - INFO - Waiting for application startup.
+2025-05-12 23:35:13 - hackmd_sensor_node.server - INFO - HackMD Sensor Node: FastAPI application startup...
+2025-05-12 23:35:13 - koi_net.core - INFO - Starting processor worker thread
+2025-05-12 23:35:13 - koi_net.network.graph - DEBUG - Generating network graph
+2025-05-12 23:35:13 - koi_net.network.graph - DEBUG - Done
+2025-05-12 23:35:13 - koi_net.processor.interface - DEBUG - Queued <KObj 'orn:koi-net.node:hackmd-sensor+c1311da2-023f-4ce5-a262-6b9a6db85dea' event type: 'None' -> 'None', source: 'INTERNAL'>
+2025-05-12 23:35:13 - koi_net.processor.interface - DEBUG - Dequeued <KObj 'orn:koi-net.node:hackmd-sensor+c1311da2-023f-4ce5-a262-6b9a6db85dea' event type: 'None' -> 'None', source: 'INTERNAL'>
+2025-05-12 23:35:13 - koi_net.core - DEBUG - Waiting for kobj queue to empty
+2025-05-12 23:35:13 - koi_net.processor.interface - DEBUG - Handling <KObj 'orn:koi-net.node:hackmd-sensor+c1311da2-023f-4ce5-a262-6b9a6db85dea' event type: 'None' -> 'None', source: 'INTERNAL'>
+2025-05-12 23:35:13 - koi_net.processor.interface - DEBUG - Calling rid handler 'basic_rid_handler'
+2025-05-12 23:35:13 - koi_net.processor.interface - DEBUG - Calling manifest handler 'basic_manifest_handler'
+2025-05-12 23:35:13 - koi_net.processor.default_handlers - DEBUG - RID previously unknown to me, labeling as 'NEW'
+2025-05-12 23:35:13 - koi_net.processor.interface - DEBUG - Knowledge object modified by basic_manifest_handler
+2025-05-12 23:35:13 - koi_net.processor.interface - INFO - Writing to cache: <KObj 'orn:koi-net.node:hackmd-sensor+c1311da2-023f-4ce5-a262-6b9a6db85dea' event type: 'None' -> 'NEW', source: 'INTERNAL'>
+2025-05-12 23:35:13 - koi_net.processor.interface - DEBUG - Change to node or edge, regenerating network graph
+2025-05-12 23:35:13 - koi_net.network.graph - DEBUG - Generating network graph
+2025-05-12 23:35:13 - koi_net.network.graph - DEBUG - Added node orn:koi-net.node:hackmd-sensor+c1311da2-023f-4ce5-a262-6b9a6db85dea
+2025-05-12 23:35:13 - koi_net.network.graph - DEBUG - Done
+2025-05-12 23:35:13 - koi_net.processor.interface - DEBUG - Calling network handler 'basic_network_output_filter'
+2025-05-12 23:35:13 - koi_net.processor.default_handlers - DEBUG - Updating network targets with 'orn:koi-net.node' subscribers: []
+2025-05-12 23:35:13 - koi_net.processor.interface - DEBUG - Knowledge object modified by basic_network_output_filter
+2025-05-12 23:35:13 - koi_net.processor.interface - DEBUG - No network targets set
+2025-05-12 23:35:13 - koi_net.processor.interface - DEBUG - Done
+2025-05-12 23:35:13 - koi_net.core - DEBUG - Done
+2025-05-12 23:35:13 - koi_net.core - DEBUG - I don't have any neighbors, reaching out to first contact http://127.0.0.1:8080/koi-net
+2025-05-12 23:35:13 - koi_net.network.request_handler - DEBUG - Making request to http://127.0.0.1:8080/koi-net/events/broadcast
+2025-05-12 23:35:13 - httpcore.connection - DEBUG - connect_tcp.started host='127.0.0.1' port=8080 local_address=None timeout=5.0 socket_options=None
+2025-05-12 23:35:13 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x109a81400>
+2025-05-12 23:35:13 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-05-12 23:35:13 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-05-12 23:35:13 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-05-12 23:35:13 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-05-12 23:35:13 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-05-12 23:35:13 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Tue, 13 May 2025 04:35:13 GMT'), (b'server', b'uvicorn'), (b'content-length', b'4'), (b'content-type', b'application/json')])
+2025-05-12 23:35:13 - httpx - INFO - HTTP Request: POST http://127.0.0.1:8080/koi-net/events/broadcast "HTTP/1.1 200 OK"
+2025-05-12 23:35:13 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-05-12 23:35:13 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-05-12 23:35:13 - httpcore.http11 - DEBUG - response_closed.started
+2025-05-12 23:35:13 - httpcore.http11 - DEBUG - response_closed.complete
+2025-05-12 23:35:13 - httpcore.connection - DEBUG - close.started
+2025-05-12 23:35:13 - httpcore.connection - DEBUG - close.complete
+2025-05-12 23:35:13 - koi_net.network.request_handler - INFO - Broadcasted 2 event(s) to 'http://127.0.0.1:8080/koi-net'
+2025-05-12 23:35:13 - hackmd_sensor_node.server - INFO - KOI-net node orn:koi-net.node:hackmd-sensor+c1311da2-023f-4ce5-a262-6b9a6db85dea started.
+2025-05-12 23:35:13 - hackmd_sensor_node.server - INFO - NETWORK SETUP: Beginning network initialization sequence...
+2025-05-12 23:35:14 - hackmd_sensor_node.server - INFO - NETWORK SETUP: Initiating first contact with coordinator: http://127.0.0.1:8080/koi-net
+2025-05-12 23:35:14 - koi_net.network.request_handler - DEBUG - Making request to http://127.0.0.1:8080/koi-net/bundles/fetch
+2025-05-12 23:35:14 - httpcore.connection - DEBUG - connect_tcp.started host='127.0.0.1' port=8080 local_address=None timeout=5.0 socket_options=None
+2025-05-12 23:35:14 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x109a06d50>
+2025-05-12 23:35:14 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-05-12 23:35:14 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-05-12 23:35:14 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-05-12 23:35:14 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-05-12 23:35:14 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-05-12 23:35:14 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Tue, 13 May 2025 04:35:14 GMT'), (b'server', b'uvicorn'), (b'content-length', b'110'), (b'content-type', b'application/json')])
+2025-05-12 23:35:14 - httpx - INFO - HTTP Request: POST http://127.0.0.1:8080/koi-net/bundles/fetch "HTTP/1.1 200 OK"
+2025-05-12 23:35:14 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-05-12 23:35:14 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-05-12 23:35:14 - httpcore.http11 - DEBUG - response_closed.started
+2025-05-12 23:35:14 - httpcore.http11 - DEBUG - response_closed.complete
+2025-05-12 23:35:14 - httpcore.connection - DEBUG - close.started
+2025-05-12 23:35:14 - httpcore.connection - DEBUG - close.complete
+2025-05-12 23:35:14 - koi_net.network.request_handler - INFO - Fetched 0 bundle(s) from 'http://127.0.0.1:8080/koi-net'
+2025-05-12 23:35:14 - hackmd_sensor_node.server - WARNING - NETWORK SETUP: Could not fetch coordinator bundle
+2025-05-12 23:35:14 - hackmd_sensor_node.server - INFO - NETWORK SETUP: Network initialization complete
+2025-05-12 23:35:14 - hackmd_sensor_node.server - INFO - Performing initial HackMD backfill on startup...
+2025-05-12 23:35:14 - hackmd_sensor_node.config - INFO - HackMD state file '.koi/hackmd/hackmd_state.json' not found. Starting empty.
+2025-05-12 23:35:14 - hackmd_sensor_node.backfill - INFO - Starting HackMD backfill.
+2025-05-12 23:35:14 - hackmd_sensor_node.backfill - INFO - Targeting specific HackMD notes for backfill: ['C1xso4C8SH-ZzDaloTq4Uw']
+2025-05-12 23:35:14 - hackmd_sensor_node.backfill - DEBUG - Fetching targeted note ID: C1xso4C8SH-ZzDaloTq4Uw
+2025-05-12 23:35:14 - httpcore.connection - DEBUG - connect_tcp.started host='api.hackmd.io' port=443 local_address=None timeout=5.0 socket_options=None
+2025-05-12 23:35:14 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x109aac690>
+2025-05-12 23:35:14 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x109a13770> server_hostname='api.hackmd.io' timeout=5.0
+2025-05-12 23:35:15 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x109a55350>
+2025-05-12 23:35:15 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-05-12 23:35:15 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-05-12 23:35:15 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-05-12 23:35:15 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-05-12 23:35:15 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-05-12 23:35:16 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Tue, 13 May 2025 04:35:15 GMT'), (b'Content-Type', b'application/json; charset=utf-8'), (b'Content-Length', b'19303'), (b'Connection', b'keep-alive'), (b'X-Powered-By', b'Express'), (b'Content-Language', b'dev'), (b'Set-Cookie', b'locale=dev; path=/; expires=Wed, 13 May 2026 04:35:15 GMT'), (b'X-HackMD-API-Version', b'1.0.0'), (b'X-RateLimit-UserLimit', b'2000'), (b'X-RateLimit-UserRemaining', b'1535'), (b'X-RateLimit-UserReset', b'1748735999999'), (b'X-Target-Scope', b'user'), (b'X-Target-Id', b'36c0c87e-77a1-4950-b6a5-b58b44164c3f'), (b'ETag', b'W/"4b67-ozqN1ldmz845iesIjYSqFboo/O8"')])
+2025-05-12 23:35:16 - httpx - INFO - HTTP Request: GET https://api.hackmd.io/v1/notes/C1xso4C8SH-ZzDaloTq4Uw "HTTP/1.1 200 OK"
+2025-05-12 23:35:16 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-05-12 23:35:16 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-05-12 23:35:16 - httpcore.http11 - DEBUG - response_closed.started
+2025-05-12 23:35:16 - httpcore.http11 - DEBUG - response_closed.complete
+2025-05-12 23:35:16 - httpcore.connection - DEBUG - close.started
+2025-05-12 23:35:16 - httpcore.connection - DEBUG - close.complete
+2025-05-12 23:35:16 - hackmd_sensor_node.backfill - INFO - Processing targeted note 'Working Concept — “Net-of-Nets” Model v0.4-r2' (ID: C1xso4C8SH-ZzDaloTq4Uw) - New or updated.
+2025-05-12 23:35:16 - hackmd_sensor_node.backfill - DEBUG - Making backfill targeted note bundle orn:hackmd.note:C1xso4C8SH-ZzDaloTq4Uw available locally.
+2025-05-12 23:35:16 - koi_net.processor.interface - DEBUG - Queued <KObj 'orn:hackmd.note:C1xso4C8SH-ZzDaloTq4Uw' event type: 'None' -> 'None', source: 'INTERNAL'>
+2025-05-12 23:35:16 - koi_net.processor.interface - DEBUG - Dequeued <KObj 'orn:hackmd.note:C1xso4C8SH-ZzDaloTq4Uw' event type: 'None' -> 'None', source: 'INTERNAL'>
+2025-05-12 23:35:16 - hackmd_sensor_node.backfill - INFO - HackMD backfill complete. Processed 1 notes, bundled 1 new/updated notes.
+2025-05-12 23:35:16 - koi_net.processor.interface - DEBUG - Handling <KObj 'orn:hackmd.note:C1xso4C8SH-ZzDaloTq4Uw' event type: 'None' -> 'None', source: 'INTERNAL'>
+2025-05-12 23:35:16 - koi_net.processor.interface - DEBUG - Calling rid handler 'basic_rid_handler'
+2025-05-12 23:35:16 - koi_net.processor.interface - DEBUG - Calling manifest handler 'basic_manifest_handler'
+2025-05-12 23:35:16 - koi_net.processor.default_handlers - DEBUG - RID previously unknown to me, labeling as 'NEW'
+2025-05-12 23:35:16 - koi_net.processor.interface - DEBUG - Knowledge object modified by basic_manifest_handler
+2025-05-12 23:35:16 - hackmd_sensor_node.config - DEBUG - Saved HackMD state to '.koi/hackmd/hackmd_state.json'.
+2025-05-12 23:35:16 - koi_net.processor.interface - INFO - Writing to cache: <KObj 'orn:hackmd.note:C1xso4C8SH-ZzDaloTq4Uw' event type: 'None' -> 'NEW', source: 'INTERNAL'>
+2025-05-12 23:35:16 - hackmd_sensor_node.server - INFO - Initial HackMD backfill completed.
+2025-05-12 23:35:16 - hackmd_sensor_node.server - INFO - HackMD backfill loop starting. Interval: 600 seconds.
+2025-05-12 23:35:16 - hackmd_sensor_node.config - INFO - Loaded HackMD state from '.koi/hackmd/hackmd_state.json': 1 notes tracked.
+2025-05-12 23:35:16 - koi_net.processor.interface - DEBUG - Calling network handler 'basic_network_output_filter'
+2025-05-12 23:35:16 - hackmd_sensor_node.server - INFO - Starting periodic HackMD backfill...
+2025-05-12 23:35:16 - koi_net.processor.default_handlers - DEBUG - Updating network targets with 'orn:hackmd.note' subscribers: []
+2025-05-12 23:35:16 - hackmd_sensor_node.backfill - INFO - Starting HackMD backfill.
+2025-05-12 23:35:16 - koi_net.processor.interface - DEBUG - Knowledge object modified by basic_network_output_filter
+2025-05-12 23:35:16 - hackmd_sensor_node.backfill - INFO - Targeting specific HackMD notes for backfill: ['C1xso4C8SH-ZzDaloTq4Uw']
+2025-05-12 23:35:16 - koi_net.processor.interface - DEBUG - No network targets set
+2025-05-12 23:35:16 - hackmd_sensor_node.backfill - DEBUG - Fetching targeted note ID: C1xso4C8SH-ZzDaloTq4Uw
+2025-05-12 23:35:16 - koi_net.processor.interface - DEBUG - Done
+2025-05-12 23:35:16 - httpcore.connection - DEBUG - connect_tcp.started host='api.hackmd.io' port=443 local_address=None timeout=5.0 socket_options=None
+2025-05-12 23:35:16 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x109a568b0>
+2025-05-12 23:35:16 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x109a136e0> server_hostname='api.hackmd.io' timeout=5.0
+2025-05-12 23:35:16 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1098efd10>
+2025-05-12 23:35:16 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-05-12 23:35:16 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-05-12 23:35:16 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-05-12 23:35:16 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-05-12 23:35:16 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-05-12 23:35:17 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Tue, 13 May 2025 04:35:17 GMT'), (b'Content-Type', b'application/json; charset=utf-8'), (b'Content-Length', b'19303'), (b'Connection', b'keep-alive'), (b'X-Powered-By', b'Express'), (b'Content-Language', b'dev'), (b'Set-Cookie', b'locale=dev; path=/; expires=Wed, 13 May 2026 04:35:17 GMT'), (b'X-HackMD-API-Version', b'1.0.0'), (b'X-RateLimit-UserLimit', b'2000'), (b'X-RateLimit-UserRemaining', b'1534'), (b'X-RateLimit-UserReset', b'1748735999999'), (b'X-Target-Scope', b'user'), (b'X-Target-Id', b'36c0c87e-77a1-4950-b6a5-b58b44164c3f'), (b'ETag', b'W/"4b67-ozqN1ldmz845iesIjYSqFboo/O8"')])
+2025-05-12 23:35:17 - httpx - INFO - HTTP Request: GET https://api.hackmd.io/v1/notes/C1xso4C8SH-ZzDaloTq4Uw "HTTP/1.1 200 OK"
+2025-05-12 23:35:17 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-05-12 23:35:17 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-05-12 23:35:17 - httpcore.http11 - DEBUG - response_closed.started
+2025-05-12 23:35:17 - httpcore.http11 - DEBUG - response_closed.complete
+2025-05-12 23:35:17 - httpcore.connection - DEBUG - close.started
+2025-05-12 23:35:17 - httpcore.connection - DEBUG - close.complete
+2025-05-12 23:35:17 - hackmd_sensor_node.backfill - DEBUG - Skipping targeted note 'Working Concept — “Net-of-Nets” Model v0.4-r2' (ID: C1xso4C8SH-ZzDaloTq4Uw) - Already up-to-date.
+2025-05-12 23:35:17 - hackmd_sensor_node.backfill - INFO - HackMD backfill complete. Processed 1 notes, bundled 0 new/updated notes.
+2025-05-12 23:35:17 - hackmd_sensor_node.config - DEBUG - Saved HackMD state to '.koi/hackmd/hackmd_state.json'.
+2025-05-12 23:35:17 - hackmd_sensor_node.server - INFO - Periodic HackMD backfill completed.
+2025-05-12 23:35:17 - uvicorn.error - INFO - Application startup complete.
+2025-05-12 23:35:17 - uvicorn.error - INFO - Uvicorn running on http://127.0.0.1:8002 (Press CTRL+C to quit)
+2025-05-12 23:35:49 - uvicorn.error - INFO - Shutting down
+2025-05-12 23:35:49 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-05-12 23:35:49 - hackmd_sensor_node.server - INFO - HackMD Sensor Node: FastAPI application shutdown...
+2025-05-12 23:35:49 - koi_net.core - INFO - Stopping node...
+2025-05-12 23:35:49 - koi_net.core - INFO - Waiting for kobj queue to empty (0 tasks remaining)
+2025-05-12 23:35:49 - hackmd_sensor_node.server - INFO - KOI-net node orn:koi-net.node:hackmd-sensor+c1311da2-023f-4ce5-a262-6b9a6db85dea stopped.
+2025-05-12 23:35:49 - hackmd_sensor_node.server - INFO - HackMD Sensor Node: Shutdown complete.
+2025-05-12 23:35:49 - uvicorn.error - INFO - Application shutdown complete.
+2025-05-12 23:35:49 - uvicorn.error - INFO - Finished server process [94462]
