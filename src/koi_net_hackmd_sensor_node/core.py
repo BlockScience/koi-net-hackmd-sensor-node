@@ -2,10 +2,15 @@ import logging
 from koi_net import NodeInterface
 from koi_net.processor.default_handlers import (
     basic_rid_handler,
+    secure_profile_handler,
     edge_negotiation_handler,
-    basic_network_output_filter
+    coordinator_contact,
+    basic_network_output_filter,
+    forget_edge_on_node_deletion
 )
+
 from .config import HackMDSensorNodeConfig
+from .lifecycle import CustomNodeLifecycle
 
 logger = logging.getLogger(__name__)
 
@@ -15,9 +20,13 @@ node = NodeInterface(
     use_kobj_processor_thread=True,
     handlers=[
         basic_rid_handler,
+        secure_profile_handler,
         edge_negotiation_handler,
-        basic_network_output_filter
-    ]
+        coordinator_contact,
+        basic_network_output_filter,
+        forget_edge_on_node_deletion
+    ],
+    NodeLifecycleOverride=CustomNodeLifecycle
 )
 
 from . import handlers

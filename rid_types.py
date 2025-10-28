@@ -12,4 +12,4 @@ class HackMDNote(ORN):
     
     @classmethod
     def from_reference(cls, reference):
-        return cls(reference)    
+        return cls(reference)
