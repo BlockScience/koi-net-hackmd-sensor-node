@@ -1,3 +1,5 @@
-from .core import node
+from .core import HackMDSensorNode
 
-node.server.run()
+node = HackMDSensorNode()
+
+node.entrypoint.run()

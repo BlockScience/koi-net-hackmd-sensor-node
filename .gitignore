@@ -3,6 +3,7 @@ events_queue.json
 .venv
 .env
 *.json
+*.ndjson
 __pycache__
 config.yaml
 priv_key.pem
