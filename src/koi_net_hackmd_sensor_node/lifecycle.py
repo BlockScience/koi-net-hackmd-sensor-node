@@ -1,11 +1,11 @@
-import logging
+import structlog
 import asyncio
 from koi_net.lifecycle import NodeLifecycle
 from rid_lib.ext import Bundle
-from rid_types import HackMDNote
+from rid_lib.types import HackMDNote
 from .hackmd_api import HackMDClient
 
-logger = logging.getLogger(__name__)
+log = structlog.stdlib.get_logger()
 
 
 class CustomNodeLifecycle(NodeLifecycle):
@@ -14,7 +14,7 @@ class CustomNodeLifecycle(NodeLifecycle):
         notes = await hackmd.async_request(
             f"/teams/{self.config.hackmd.team_path}/notes")
     
-        logger.debug(f"Found {len(notes)} in team")
+        log.debug(f"Found {len(notes)} in team")
 
         for note in notes:
             note_rid = HackMDNote(note["id"])
@@ -24,7 +24,7 @@ class CustomNodeLifecycle(NodeLifecycle):
                 contents=note
             )
             
-            self.processor.handle(bundle=note_bundle)
+            self.kobj_queue.push(bundle=note_bundle)
     
     async def backfill_loop(self):
         while True:
