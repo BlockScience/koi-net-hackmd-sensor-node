@@ -17,6 +17,7 @@ config.yaml
 private_key.pem
 dist/*
 cache
+state
 tests
 log.ndjson
 state
