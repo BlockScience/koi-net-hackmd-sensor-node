@@ -1,16 +1,15 @@
-from pydantic import Field, BaseModel, PrivateAttr
-from koi_net_shared import HackMDNote
+import os
+
+from dotenv import load_dotenv
 from koi_net.config.full_node import (
     FullNodeConfig,
-    ServerConfig,
     KoiNetConfig,
     NodeProfile,
-    NodeProvides
+    NodeProvides,
+    ServerConfig,
 )
+from pydantic import BaseModel, Field, PrivateAttr
 from rid_lib.types import KoiNetNode
-
-import os
-from dotenv import load_dotenv
 
 
 class HackMDConfig(BaseModel):
