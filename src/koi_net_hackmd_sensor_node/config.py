@@ -1,16 +1,17 @@
-import os
-
-from dotenv import load_dotenv
 from koi_net.config.full_node import (
     FullNodeConfig,
     KoiNetConfig,
     NodeProfile,
     NodeProvides,
-    ServerConfig,
+    ServerConfig
 )
-from pydantic import BaseModel, Field, PrivateAttr
-from rid_lib.types import KoiNetNode
+from koi_net.config.base import EnvConfig
+from pydantic import BaseModel, Field
+from rid_lib.types import KoiNetNode, HackMDNote
 
+
+class HackMDEnvConfig(EnvConfig):
+    hackmd_api_token: str
 
 class HackMDConfig(BaseModel):
     workspace_id: str | None = None
@@ -21,20 +22,6 @@ class HackMDConfig(BaseModel):
     retries: int = 3
     backoff_base_seconds: float = 1.0
     backoff_max_seconds: float = 10.0
-
-    _api_token: str = PrivateAttr()
-
-    def __init__(self, **data):
-        super().__init__(**data)
-        load_dotenv()
-        self._api_token = os.getenv("HACKMD_API_TOKEN")
-        if not self._api_token:
-            raise ValueError("HACKMD_API_TOKEN environment variable not set.")
-
-    @property
-    def api_token(self) -> str:
-        return self._api_token
-
 
 class HackMDSensorConfig(FullNodeConfig):
     hackmd: HackMDConfig = Field(default_factory=HackMDConfig)
@@ -49,3 +36,4 @@ class HackMDSensorConfig(FullNodeConfig):
         ),
         rid_types_of_interest=[KoiNetNode]
     )
+    env: HackMDEnvConfig = Field(default_factory=HackMDEnvConfig)

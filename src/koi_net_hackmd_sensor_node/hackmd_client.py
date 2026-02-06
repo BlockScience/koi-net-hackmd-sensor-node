@@ -4,15 +4,19 @@ import time
 import random
 from datetime import datetime
 from typing import List, Dict, Any, Optional
+
 from .models import HackMDNoteObject
 
-logger = logging.getLogger(__name__)
 
 def _parse_date_string(date_str: Any) -> Optional[datetime]:
     """
+    NOTE: this seems to be currently unused
+    
     Parses a date string, handling potential None, int, or empty string values.
     Returns a datetime object or None if parsing fails.
     """
+    logger = logging.getLogger(__name__)
+    
     if date_str is None:
         return None
 
@@ -41,12 +45,14 @@ class HackMDClient:
     def __init__(
         self,
         api_token: str,
+        log: logging.Logger = logging.getLogger(__name__),
         workspace_id: str | None = None,
         note_ids: List[str] | None = None,
         retries: int = 3,
         backoff_base: float = 1.0,
         backoff_max: float = 10.0,
     ):
+        self.log = log
         self.api_token = api_token
         self.workspace_id = workspace_id
         self.note_ids = note_ids or []
@@ -78,11 +84,11 @@ class HackMDClient:
                 return resp
             except (httpx.ConnectError, httpx.ReadError, httpx.TimeoutException, httpx.HTTPStatusError) as e:
                 if attempt >= self.retries:
-                    logger.error("GET %s failed after %d retries: %s", url, attempt, e)
+                    self.log.error("GET %s failed after %d retries: %s", url, attempt, e)
                     raise
                 delay = min(self.backoff_max, self.backoff_base * (2 ** attempt))
                 delay = delay * (0.5 + random.random())  # jitter
-                logger.warning("GET %s failed (%s). retrying in %.2fs", url, type(e).__name__, delay)
+                self.log.warning("GET %s failed (%s). retrying in %.2fs", url, type(e).__name__, delay)
                 time.sleep(delay)
                 attempt += 1
 
@@ -148,7 +154,7 @@ class HackMDClient:
             try:
                 content = self.get_note_content(note_data["id"]) or ""
             except Exception as e:
-                logger.warning(f"Failed to fetch content for note {note_data.get('id')}: {e}")
+                self.log.warning(f"Failed to fetch content for note {note_data.get('id')}: {e}")
                 content = ""
 
         # Determine workspace/team path if present in payload
