@@ -1,0 +1,46 @@
+koi_net:
+  node_name: hackmd_sensor
+  node_rid: 
+    orn:koi-net.node:hackmd_sensor+ade579c118a3fe058495440514f6e6d0bc7fec1ae2eec818bdda654be27480ed
+  node_profile:
+    base_url: http://127.0.0.1:8001/koi-net
+    node_type: FULL
+    provides:
+      event:
+      - orn:hackmd.note
+      - orn:koi-net.node
+      state:
+      - orn:hackmd.note
+      - orn:koi-net.node
+    public_key: 
+      MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEblTQU0yfIGP6f1+p8Gz4Ca0leDVm69yLK03lhEJr+eDTXMrzPPpGgdxQd/XlxM0+crZPJ9K0v67177EYfUfjtA==
+  rid_types_of_interest:
+  - orn:koi-net.node
+  cache_directory_path: ./cache
+  private_key_pem_path: private_key.pem
+  event_worker:
+    queue_timeout: 0.1
+    max_buf_len: 5
+    max_wait_time: 1.0
+  kobj_worker:
+    queue_timeout: 0.1
+  first_contact:
+    rid: 
+      orn:koi-net.node:coordinator+1baf6be6d4c033e96f8cc13cf5e7f09fba1e222628f61fcce926f59a9c6dcb94
+    url: http://127.0.0.1:8080/koi-net
+env:
+  priv_key_password: PRIV_KEY_PASSWORD
+server:
+  host: 127.0.0.1
+  port: 8001
+  path: /koi-net
+hackmd:
+  workspace_id:
+  note_ids:
+  - -3EahWEbQQe3TB6THIywLA
+  poll_interval_seconds: 300
+  max_notes_per_poll: 100
+  state_path: state/hackmd_state.json
+  retries: 3
+  backoff_base_seconds: 1.0
+  backoff_max_seconds: 10.0

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .rid_cache
 events_queue.json
 .venv
@@ -7,3 +8,19 @@ events_queue.json
 __pycache__
 config.yaml
 priv_key.pem
+=======
+rid_cache
+identity.json
+events_queue.json
+venv
+.env
+# *.json
+__pycache__
+config.yaml
+private_key.pem
+dist/*
+cache
+tests
+log.ndjson
+state
+>>>>>>> dev
