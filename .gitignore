@@ -1,35 +1,41 @@
-.venv/
-venv/
-bin/
-**/bin/
-.env
-.python-version
-
+# Python
 __pycache__/
 **/__pycache__/
 *.py[cod]
-*$py.class
+*.pyo
+*.pyd
+.python-version
+.venv/
+venv/
+env/
+bin/
+**/bin/
 
-*.json
-*.ndjson*
-.DS_Store
-dist/*
-
-config.yaml
-private_key.pem
+# Environment and secrets
+.env
+.env.*
+!.env.example
 priv_key.pem
-rid_cache
+private_key.pem
+
+# Runtime state and cache
+.rid_cache/
+rid_cache/
+cache/
+state/
 identity.json
 events_queue.json
-venv
-.env
-__pycache__
-config.yaml
-private_key.pem
-dist/*
-cache
-state
-tests
 log.ndjson
-state
-log.ndjson
+*.ndjson
+*.ndjson.*
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Local-only overrides
+config.local.yaml
+
+# OS files
+.DS_Store
