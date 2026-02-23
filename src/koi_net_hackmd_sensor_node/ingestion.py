@@ -9,7 +9,7 @@ from rid_lib.ext import Bundle
 
 from .hackmd_client import HackMDClient
 from .models import HackMDNoteObject
-from koi_net_shared import HackMDNote
+from rid_lib.types import HackMDNote
 
 log = structlog.stdlib.get_logger()
 

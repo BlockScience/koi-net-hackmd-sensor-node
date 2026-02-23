@@ -8,7 +8,7 @@ from koi_net.config.full_node import (
     NodeProvides,
     ServerConfig,
 )
-from koi_net_shared import HackMDNote
+from rid_lib.types import HackMDNote
 from pydantic import BaseModel, Field, PrivateAttr
 from rid_lib.types import KoiNetNode
 

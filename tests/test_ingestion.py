@@ -1,7 +1,7 @@
 import json
 import types
 
-from koi_net_shared.rid_types import HackMDNote
+from rid_lib.types import HackMDNote
 
 from koi_net_hackmd_sensor_node.ingestion import HackMDIngestionService
 
