@@ -1,22 +1,27 @@
 import asyncio
+from dataclasses import dataclass
 
-import structlog
-from koi_net.lifecycle import NodeLifecycle
+from koi_net.core import KobjQueue
+from koi_net.build.threaded_component import ThreadedComponent
 from rid_lib.ext import Bundle
 from rid_lib.types import HackMDNote
 
+from .config import HackMDSensorConfig
 from .hackmd_api import HackMDClient
 
-log = structlog.stdlib.get_logger()
+# NOTE: seemingly unused
 
-
-class CustomNodeLifecycle(NodeLifecycle):
+@dataclass
+class CustomNodeLifecycle(ThreadedComponent):
+    kobj_queue: KobjQueue
+    config: HackMDSensorConfig
+    
     async def backfill(self):
         hackmd = HackMDClient(self.config.env.hackmd_api_token)
         notes = await hackmd.async_request(
             f"/teams/{self.config.hackmd.team_path}/notes")
 
-        log.debug(f"Found {len(notes)} in team")
+        self.log.debug(f"Found {len(notes)} in team")
 
         for note in notes:
             note_rid = HackMDNote(note["id"])
@@ -27,14 +32,11 @@ class CustomNodeLifecycle(NodeLifecycle):
             )
 
             self.kobj_queue.push(bundle=note_bundle)
-
+    
     async def backfill_loop(self):
         while True:
             await self.backfill()
             await asyncio.sleep(600)
 
-    def start(self):
-        super().start()
-        asyncio.create_task(
-            self.backfill_loop()
-        )
+    def run(self):
+        asyncio.run(self.backfill_loop())
