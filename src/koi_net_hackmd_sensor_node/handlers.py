@@ -2,8 +2,11 @@ from koi_net.processor.context import HandlerContext
 from koi_net.processor.handler import STOP_CHAIN, HandlerType, KnowledgeHandler
 from koi_net.processor.knowledge_object import KnowledgeObject
 from rid_lib.types import HackMDNote
+import structlog
 
 from .models import HackMDNoteObject
+
+log = structlog.stdlib.get_logger()
 
 
 @KnowledgeHandler.create(
@@ -11,18 +14,28 @@ from .models import HackMDNoteObject
     rid_types=[HackMDNote]
 )
 def hackmd_bundle_handler(ctx: HandlerContext, kobj: KnowledgeObject):
-    ctx.log.debug("hackmd_bundle_handler: entry rid=%r event=%s source=%r", kobj.rid, kobj.event_type, kobj.source)
     """Validate and dedupe HackMD note bundles using `last_changed_at`.
 
     If a previous bundle exists and the incoming `last_changed_at` is not strictly newer,
     stop the handler chain to avoid redundant writes and broadcasts.
     """
+    log.debug(
+        "hackmd_bundle_handler: entry rid=%r event=%s source=%r",
+        kobj.rid,
+        kobj.event_type,
+        kobj.source,
+    )
 
     try:
         hackmd_data = HackMDNoteObject.model_validate(kobj.contents or {})
     except Exception as e:
         import traceback
-        ctx.log.warning("Invalid HackMDNoteObject payload for %s: %s\nTRACE=\n%s", kobj.rid, e, traceback.format_exc())
+        log.warning(
+            "Invalid HackMDNoteObject payload for %s: %s\nTRACE=\n%s",
+            kobj.rid,
+            e,
+            traceback.format_exc(),
+        )
         return STOP_CHAIN
 
     prev_bundle = ctx.cache.read(kobj.rid)
@@ -34,13 +47,17 @@ def hackmd_bundle_handler(ctx: HandlerContext, kobj: KnowledgeObject):
 
             if current_timestamp and prev_timestamp:
                 if current_timestamp <= prev_timestamp:
-                    ctx.log.debug("Skipping stale/no-op HackMDNote for %s (incoming <= cached)", kobj.rid)
+                    log.debug("Skipping stale/no-op HackMDNote for %s (incoming <= cached)", kobj.rid)
                     return STOP_CHAIN
         except Exception:
             # If previous payload cannot be parsed, fall through and allow write
             pass
 
-    ctx.log.debug("Accepting HackMD note: %s (chars=%d)", getattr(hackmd_data, "title", None), len(hackmd_data.content or ""))
+    log.debug(
+        "Accepting HackMD note: %s (chars=%d)",
+        getattr(hackmd_data, "title", None),
+        len(hackmd_data.content or ""),
+    )
 
 # Intentionally omit auto-negotiation beyond KOI default handlers to keep
 # the sensor focused on emitting HackMDNote. Downstream consumers should
@@ -52,7 +69,7 @@ def hackmd_bundle_handler(ctx: HandlerContext, kobj: KnowledgeObject):
 )
 def logging_handler(ctx: HandlerContext, kobj: KnowledgeObject):
     """Log processed knowledge objects"""
-    ctx.log.info(f"Processed {type(kobj.rid).__name__}: {kobj.rid}")
+    log.info(f"Processed {type(kobj.rid).__name__}: {kobj.rid}")
 
 
 # Export handlers for HackMDSensorNode class
