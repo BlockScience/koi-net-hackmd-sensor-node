@@ -18,7 +18,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = {file = "LICENSE"}
 dependencies = [
-    "koi-net>=1.1.0b8",
+    "koi-net>=1.2.4",
     "colorama>=0.4.6",
     "rid_lib>=3.2.14",
     "rich>=14.0.0",
