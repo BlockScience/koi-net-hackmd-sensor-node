@@ -1,3 +1,7 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [tool.hatch.metadata]
 allow-direct-references = true
 
@@ -14,12 +18,12 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = {file = "LICENSE"}
 dependencies = [
-    "koi-net",
+    "koi-net>=1.1.0b8",
     "colorama>=0.4.6",
-    "rid_lib>=3.2.13",
+    "rid_lib>=3.2.14",
     "rich>=14.0.0",
     "httpx>=0.28.1",
-    "rid-lib>=3.2.14",
+    "pydantic>=2.10.6",
 ]
 
 [project.optional-dependencies]
