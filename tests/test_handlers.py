@@ -6,7 +6,7 @@ from rid_lib.ext import Bundle
 from koi_net.processor.handler import STOP_CHAIN
 from koi_net.processor.knowledge_object import KnowledgeObject
 from koi_net.protocol.event import EventType
-from koi_net_shared.rid_types import HackMDNote
+from rid_lib.types import HackMDNote
 from koi_net_hackmd_sensor_node.handlers import hackmd_bundle_handler
 
 

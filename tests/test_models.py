@@ -2,7 +2,7 @@ import pytest
 from pydantic import ValidationError
 
 from koi_net_hackmd_sensor_node.models import HackMDNoteObject
-from koi_net_shared.rid_types import HackMDNote
+from rid_lib.types import HackMDNote
 
 
 def test_hackmd_note_object_parses_payload(hackmd_payload):

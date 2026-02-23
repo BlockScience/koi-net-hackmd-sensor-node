@@ -2,7 +2,7 @@ import structlog
 from koi_net.processor.context import HandlerContext
 from koi_net.processor.handler import STOP_CHAIN, HandlerType, KnowledgeHandler
 from koi_net.processor.knowledge_object import KnowledgeObject
-from koi_net_shared import HackMDNote
+from rid_lib.types import HackMDNote
 from rid_lib.ext import Bundle
 
 from .models import HackMDNoteObject
