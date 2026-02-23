@@ -2,21 +2,22 @@ import json
 import os
 import threading
 import time
-from logging import Logger
 
 from koi_net.core import KobjQueue
 from rid_lib.ext import Bundle
 from rid_lib.types import HackMDNote
+import structlog
 
 from .config import HackMDSensorConfig
 from .hackmd_client import HackMDClient
 from .models import HackMDNoteObject
 
+log = structlog.stdlib.get_logger()
+
 
 class HackMDIngestionService:
     def __init__(
         self,
-        log: Logger,
         config: HackMDSensorConfig, 
         kobj_queue: KobjQueue
     ):
@@ -25,7 +26,7 @@ class HackMDIngestionService:
         self.kobj_queue = kobj_queue
 
         self.client = HackMDClient(
-            api_token=config.env.hackmd_api_token,
+            api_token=config.env.HACKMD_API_TOKEN,
             log=self.log,
             workspace_id=config.hackmd.workspace_id,
             note_ids=config.hackmd.note_ids,
@@ -48,7 +49,7 @@ class HackMDIngestionService:
         except FileNotFoundError:
             return {}
         except Exception as e:
-            self.log.warning("Failed to load state file %s: %s", self.state_path, e)
+            self.log.warning(f"Failed to load state file {self.state_path}: {e}")
             return {}
 
     def _save_state(self):
@@ -59,7 +60,7 @@ class HackMDIngestionService:
                 with open(self.state_path, "w") as f:
                     json.dump(self.state, f, indent=2, default=str)
         except Exception as e:
-            self.log.warning("Failed to write state file %s: %s", self.state_path, e)
+            self.log.warning(f"Failed to write state file {self.state_path}: {e}")
 
     def _state_key(self, note: HackMDNoteObject) -> str:
         # Use workspace/note_id if available for uniqueness; else note_id
@@ -71,7 +72,7 @@ class HackMDIngestionService:
             return
 
         poll_interval = self.config.hackmd.poll_interval_seconds
-        self.log.info("HackMD ingestion service starting; interval=%ss", poll_interval)
+        self.log.info(f"HackMD ingestion service starting; interval={poll_interval}s")
 
         self._stop_event.clear()
 
@@ -82,7 +83,7 @@ class HackMDIngestionService:
                 try:
                     self.poll_once()
                 except Exception as e:
-                    self.log.error("Ingestion poll failed: %s", e)
+                    self.log.error(f"Ingestion poll failed: {e}")
                     time.sleep(5)
                 elapsed = time.time() - start
                 remaining = max(0.0, poll_interval - elapsed)
@@ -141,7 +142,7 @@ class HackMDIngestionService:
                 self.state[key] = current_timestamp
 
         if processed:
-            self.log.info("Processed %d HackMD notes", processed)
+            self.log.info(f"Processed {processed} HackMD notes")
             self._save_state()
         else:
             self.log.info("No HackMD note changes detected")
@@ -156,6 +157,6 @@ class HackMDIngestionService:
             
             bundle = Bundle.generate(rid=note_rid, contents=contents)
             self.kobj_queue.push(bundle=bundle)
-            self.log.debug("Queued bundle for %s", note_rid)
+            self.log.debug(f"Queued bundle for {note_rid}")
         except Exception as e:
-            self.log.error("Failed to process note %s: %s", note_rid, e)
+            self.log.error(f"Failed to process note {note_rid}: {e}")

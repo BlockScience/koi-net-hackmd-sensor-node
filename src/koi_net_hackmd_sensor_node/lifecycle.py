@@ -17,7 +17,7 @@ class CustomNodeLifecycle(ThreadedComponent):
     config: HackMDSensorConfig
     
     async def backfill(self):
-        hackmd = HackMDClient(self.config.env.hackmd_api_token)
+        hackmd = HackMDClient(self.config.env.HACKMD_API_TOKEN)
         notes = await hackmd.async_request(
             f"/teams/{self.config.hackmd.team_path}/notes")
 

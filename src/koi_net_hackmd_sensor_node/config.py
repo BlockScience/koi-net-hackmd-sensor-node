@@ -5,13 +5,13 @@ from koi_net.config.full_node import (
     NodeProvides,
     ServerConfig
 )
-from koi_net.config.base import EnvConfig
+from koi_net.config.core import EnvConfig
 from pydantic import BaseModel, Field
 from rid_lib.types import KoiNetNode, HackMDNote
 
 
 class HackMDEnvConfig(EnvConfig):
-    hackmd_api_token: str
+    HACKMD_API_TOKEN: str = "HACKMD_API_TOKEN"
 
 class HackMDConfig(BaseModel):
     workspace_id: str | None = None
