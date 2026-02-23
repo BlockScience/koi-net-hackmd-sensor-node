@@ -24,23 +24,105 @@ class HackMDIngestionService:
         self.log = log
         self.config = config
         self.kobj_queue = kobj_queue
+        self.poll_interval = self._resolve_int(
+            env_value=getattr(config.env, "HACKMD_POLL_INTERVAL_SECONDS", ""),
+            fallback=config.hackmd.poll_interval_seconds,
+            label="HACKMD_POLL_INTERVAL_SECONDS",
+        )
+        self.max_notes_per_poll = self._resolve_int(
+            env_value=getattr(config.env, "HACKMD_MAX_NOTES_PER_POLL", ""),
+            fallback=config.hackmd.max_notes_per_poll,
+            label="HACKMD_MAX_NOTES_PER_POLL",
+        )
+        workspace_id = self._resolve_optional_str(
+            env_value=getattr(config.env, "HACKMD_WORKSPACE_ID", ""),
+            fallback=config.hackmd.workspace_id,
+        )
+        note_ids = self._resolve_note_ids(
+            env_value=getattr(config.env, "HACKMD_NOTE_IDS", ""),
+            fallback=config.hackmd.note_ids,
+        )
+        retries = self._resolve_int(
+            env_value=getattr(config.env, "HACKMD_RETRIES", ""),
+            fallback=getattr(config.hackmd, "retries", 3),
+            label="HACKMD_RETRIES",
+        )
+        backoff_base = self._resolve_float(
+            env_value=getattr(config.env, "HACKMD_BACKOFF_BASE_SECONDS", ""),
+            fallback=getattr(config.hackmd, "backoff_base_seconds", 1.0),
+            label="HACKMD_BACKOFF_BASE_SECONDS",
+        )
+        backoff_max = self._resolve_float(
+            env_value=getattr(config.env, "HACKMD_BACKOFF_MAX_SECONDS", ""),
+            fallback=getattr(config.hackmd, "backoff_max_seconds", 10.0),
+            label="HACKMD_BACKOFF_MAX_SECONDS",
+        )
 
         self.client = HackMDClient(
             api_token=config.env.HACKMD_API_TOKEN,
             log=self.log,
-            workspace_id=config.hackmd.workspace_id,
-            note_ids=config.hackmd.note_ids,
-            retries=getattr(config.hackmd, "retries", 3),
-            backoff_base=getattr(config.hackmd, "backoff_base_seconds", 1.0),
-            backoff_max=getattr(config.hackmd, "backoff_max_seconds", 10.0),
+            workspace_id=workspace_id,
+            note_ids=note_ids,
+            retries=retries,
+            backoff_base=backoff_base,
+            backoff_max=backoff_max,
         )
 
         # Durable state file
-        self.state_path = getattr(config.hackmd, "state_path", "cache/hackmd_state.json")
+        env_state_path = self._resolve_optional_str(
+            env_value=getattr(config.env, "HACKMD_STATE_PATH", ""),
+            fallback=getattr(config.hackmd, "state_path", "cache/hackmd_state.json"),
+        )
+        self.state_path = env_state_path or "cache/hackmd_state.json"
         self.state_lock = threading.Lock()
         self.state = self._load_state()
         self._stop_event = threading.Event()
         self._thread: threading.Thread | None = None
+
+    @staticmethod
+    def _resolve_optional_str(env_value: str, fallback: str | None) -> str | None:
+        env_value = (env_value or "").strip()
+        if env_value:
+            return env_value
+        return fallback
+
+    @staticmethod
+    def _resolve_note_ids(env_value: str, fallback: list[str] | None) -> list[str] | None:
+        env_value = (env_value or "").strip()
+        if not env_value:
+            return fallback
+
+        note_ids: list[str] = []
+        seen: set[str] = set()
+        for item in env_value.split(","):
+            value = item.strip()
+            if not value or value in seen:
+                continue
+            seen.add(value)
+            note_ids.append(value)
+        return note_ids
+
+    @staticmethod
+    def _resolve_int(env_value: str, fallback: int, label: str) -> int:
+        env_value = (env_value or "").strip()
+        if not env_value:
+            return fallback
+        try:
+            return int(env_value)
+        except ValueError:
+            log.warning("Invalid %s=%r, using fallback=%s", label, env_value, fallback)
+            return fallback
+
+    @staticmethod
+    def _resolve_float(env_value: str, fallback: float, label: str) -> float:
+        env_value = (env_value or "").strip()
+        if not env_value:
+            return fallback
+        try:
+            return float(env_value)
+        except ValueError:
+            log.warning("Invalid %s=%r, using fallback=%s", label, env_value, fallback)
+            return fallback
 
     def _load_state(self) -> dict:
         try:
@@ -71,7 +153,7 @@ class HackMDIngestionService:
             self.log.debug("HackMD ingestion service already running")
             return
 
-        poll_interval = self.config.hackmd.poll_interval_seconds
+        poll_interval = self.poll_interval
         self.log.info(f"HackMD ingestion service starting; interval={poll_interval}s")
 
         self._stop_event.clear()
@@ -104,7 +186,7 @@ class HackMDIngestionService:
 
     def poll_once(self):
         self.log.info("Polling HackMD for notes...")
-        notes = self.client.get_notes(limit=self.config.hackmd.max_notes_per_poll)
+        notes = self.client.get_notes(limit=self.max_notes_per_poll)
 
         processed = 0
         for note in notes:
