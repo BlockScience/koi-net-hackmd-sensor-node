@@ -1,0 +1,54 @@
+koi_net:
+  node_name: hackmd_sensor
+  node_rid:
+  node_profile:
+    base_url: http://127.0.0.1:8001/koi-net
+    node_type: FULL
+    provides:
+      event:
+        - orn:hackmd.note
+        - orn:koi-net.node
+      state:
+        - orn:hackmd.note
+        - orn:koi-net.node
+    public_key:
+  rid_types_of_interest:
+    - orn:koi-net.node
+  cache_directory_path: .rid_cache
+  private_key_pem_path: priv_key.pem
+  event_worker:
+    queue_timeout: 0.1
+    max_buf_len: 5
+    max_wait_time: 1.0
+  kobj_worker:
+    queue_timeout: 0.1
+  first_contact:
+    rid:
+    url: http://127.0.0.1:8080/koi-net
+
+env:
+  priv_key_password: PRIV_KEY_PASSWORD
+  HACKMD_API_TOKEN: HACKMD_API_TOKEN
+  HACKMD_WORKSPACE_ID: HACKMD_WORKSPACE_ID
+  HACKMD_NOTE_IDS: HACKMD_NOTE_IDS
+  HACKMD_POLL_INTERVAL_SECONDS: HACKMD_POLL_INTERVAL_SECONDS
+  HACKMD_MAX_NOTES_PER_POLL: HACKMD_MAX_NOTES_PER_POLL
+  HACKMD_STATE_PATH: HACKMD_STATE_PATH
+  HACKMD_RETRIES: HACKMD_RETRIES
+  HACKMD_BACKOFF_BASE_SECONDS: HACKMD_BACKOFF_BASE_SECONDS
+  HACKMD_BACKOFF_MAX_SECONDS: HACKMD_BACKOFF_MAX_SECONDS
+
+server:
+  host: 127.0.0.1
+  port: 8001
+  path: /koi-net
+
+hackmd:
+  workspace_id:
+  note_ids:
+  poll_interval_seconds: 300
+  max_notes_per_poll: 100
+  state_path: ./state/hackmd_state.json
+  retries: 3
+  backoff_base_seconds: 1.0
+  backoff_max_seconds: 10.0
