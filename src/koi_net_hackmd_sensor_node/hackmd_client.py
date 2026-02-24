@@ -7,40 +7,6 @@ from typing import List, Dict, Any, Optional
 
 from .models import HackMDNoteObject
 
-
-def _parse_date_string(date_str: Any) -> Optional[datetime]:
-    """
-    NOTE: this seems to be currently unused
-    
-    Parses a date string, handling potential None, int, or empty string values.
-    Returns a datetime object or None if parsing fails.
-    """
-    logger = logging.getLogger(__name__)
-    
-    if date_str is None:
-        return None
-
-    date_str = str(date_str).strip()
-    if not date_str:
-        return None
-
-    try:
-        # Try parsing as a Unix timestamp (milliseconds)
-        # Check if it's a string of digits and long enough to be a millisecond timestamp
-        if isinstance(date_str, str) and date_str.isdigit() and len(date_str) > 10:
-            timestamp_ms = int(date_str)
-            return datetime.fromtimestamp(timestamp_ms / 1000)
-
-        # HackMD often returns 'Z' for UTC, which fromisoformat doesn't directly support
-        # Replace 'Z' with '+00:00' for proper ISO 8601 parsing
-        if date_str.endswith('Z'):
-            date_str = date_str.replace('Z', '+00:00')
-        return datetime.fromisoformat(date_str)
-    except ValueError as e:
-        logger.warning(f"Could not parse date string '{date_str}': {e}")
-        return None
-
-
 class HackMDClient:
     def __init__(
         self,

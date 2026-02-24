@@ -38,7 +38,7 @@ class HackMDSensorConfig(FullNodeConfig):
         node_name="hackmd_sensor",
         node_profile=NodeProfile(
             provides=NodeProvides(
-                event=[HackMDNote, KoiNetNode],
+                event=[HackMDNote],
                 state=[HackMDNote, KoiNetNode]
             ),
         ),
