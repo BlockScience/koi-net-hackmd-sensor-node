@@ -33,7 +33,7 @@ class HackMDConfig(BaseModel):
 
 class HackMDSensorConfig(FullNodeConfig):
     hackmd: HackMDConfig = Field(default_factory=HackMDConfig)
-    server: ServerConfig = ServerConfig(port=8001)
+    server: ServerConfig = ServerConfig(port=8081)
     koi_net: KoiNetConfig = KoiNetConfig(
         node_name="hackmd_sensor",
         node_profile=NodeProfile(
