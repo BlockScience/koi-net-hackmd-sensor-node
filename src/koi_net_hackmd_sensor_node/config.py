@@ -1,3 +1,5 @@
+import os
+
 from koi_net.config.full_node import (
     FullNodeConfig,
     KoiNetConfig,
@@ -6,7 +8,7 @@ from koi_net.config.full_node import (
     ServerConfig
 )
 from koi_net.config.core import EnvConfig, NodeContact
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 from rid_lib.types import KoiNetNode, HackMDNote
 
 
@@ -20,6 +22,8 @@ class HackMDEnvConfig(EnvConfig):
     HACKMD_RETRIES: str = "HACKMD_RETRIES"
     HACKMD_BACKOFF_BASE_SECONDS: str = "HACKMD_BACKOFF_BASE_SECONDS"
     HACKMD_BACKOFF_MAX_SECONDS: str = "HACKMD_BACKOFF_MAX_SECONDS"
+    COORDINATOR_RID: str = "COORDINATOR_RID"
+    COORDINATOR_URL: str = "COORDINATOR_URL"
 
 class HackMDConfig(BaseModel):
     workspace_id: str | None = None
@@ -46,3 +50,15 @@ class HackMDSensorConfig(FullNodeConfig):
         first_contact=NodeContact(url="http://127.0.0.1:8080/koi-net"),
     )
     env: HackMDEnvConfig = Field(default_factory=HackMDEnvConfig)
+
+    @model_validator(mode="after")
+    def apply_coordinator_contact_from_env(self):
+        coordinator_rid = (os.getenv("COORDINATOR_RID") or "").strip()
+        coordinator_url = (os.getenv("COORDINATOR_URL") or "").strip()
+
+        if coordinator_rid:
+            self.koi_net.first_contact.rid = KoiNetNode.from_string(coordinator_rid)
+        if coordinator_url:
+            self.koi_net.first_contact.url = coordinator_url
+
+        return self
