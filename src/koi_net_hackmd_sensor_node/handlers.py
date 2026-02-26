@@ -1,12 +1,22 @@
 from koi_net.processor.context import HandlerContext
 from koi_net.processor.handler import STOP_CHAIN, HandlerType, KnowledgeHandler
 from koi_net.processor.knowledge_object import KnowledgeObject
-from rid_lib.types import HackMDNote
+from rid_lib.types import HackMDNote, KoiNetNode
 import structlog
 
 from .models import HackMDNoteObject
 
 log = structlog.stdlib.get_logger()
+
+
+@KnowledgeHandler.create(
+    HandlerType.Network,
+    rid_types=[KoiNetNode],
+)
+def suppress_peer_node_rebroadcast(ctx: HandlerContext, kobj: KnowledgeObject):
+    """Prevent forwarding other nodes' identity events."""
+    if kobj.source and kobj.source != ctx.identity.rid:
+        return STOP_CHAIN
 
 
 @KnowledgeHandler.create(
@@ -73,7 +83,13 @@ def logging_handler(ctx: HandlerContext, kobj: KnowledgeObject):
 
 
 # Export handlers for HackMDSensorNode class
-knowledge_handlers = [
+PREPEND_HANDLERS = [
+    suppress_peer_node_rebroadcast,
+]
+
+APPEND_HANDLERS = [
     hackmd_bundle_handler,
     logging_handler,
 ]
+
+knowledge_handlers = PREPEND_HANDLERS + APPEND_HANDLERS
