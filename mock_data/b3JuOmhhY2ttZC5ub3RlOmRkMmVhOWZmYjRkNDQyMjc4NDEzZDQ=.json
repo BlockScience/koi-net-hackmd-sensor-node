@@ -1,0 +1,34 @@
+{
+  "manifest": {
+    "rid": "orn:hackmd.note:dd2ea9ffb4d442278413d4",
+    "timestamp": "2026-04-02T19:59:46.202350Z",
+    "sha256_hash": "a258bcdc79978cb62923943a3c4b5d5b969a4f2cd2cdd622d3d175e8ed998783"
+  },
+  "contents": {
+    "note_id": "dd2ea9ffb4d442278413d4",
+    "title": "cadCAD Simulation Framework for Token Physics & KOI integration",
+    "tags": [
+      "koi",
+      "research",
+      "blockscience"
+    ],
+    "created_at": 1779234854609,
+    "title_updated_at": 1779285178517,
+    "tags_updated_at": null,
+    "publish_type": "view",
+    "published_at": null,
+    "permalink": null,
+    "publish_link": "https://hackmd.io/@danilolessa/XNCgUkAWxd",
+    "short_id": "XNCgUkAWxd",
+    "content": "# cadCAD Simulation Framework for Token Physics & KOI integration\n\n**Date**: May 22, 2026\n**Lead Author**: @danlessa (Danilo Lessa Bernardineli)\n**Contributors**: @JEJodesty (Joshua E. Jodesty), @CarolinaRiascos (Carolina Riascos)\n**Domain**: R&D / Modeling & Simulation\n\n## Introduction\nThis note details the physics-informed mathematical models driving the token mechanisms within the new KOI curation market. Using multi-scale modeling, we can observe how knowledge nodes form clusters under various incentive structures.\n\n## Computational Experiments\n**Joshua** has recently updated the core cadCAD engine which allows for highly distributed execution, vital for this complex adaptive dynamics approach.\n\nI have been working with **Carolina Riascos**, utilizing her expertise in stochastic modeling and combinatorial optimization to model the \"knowledge exchange problem\" (conceptually similar to her PhD work on kidney exchange).\n\nOur baseline Bayesian analysis shows that without strong signal validation, the graph becomes noisy.\n\n## Model Artefacts\nWe have implemented the state update logic in the `bsci-koi-bridge-demo` repository.\nSee the `model.py` implementation where we set the partial state update blocks (PSUBs).\n\n* **Repository**: `github/bsci-koi-bridge-demo/model.py`\n",
+    "last_changed_at": 1779285178517,
+    "last_change_user": {
+      "name": "Danilo Lessa",
+      "user_path": "danilolessa",
+      "photo": "https://lh3.googleusercontent.com/a/35fd40d3-a8de-4b89-a243-01ea9fc2a053",
+      "biography": null
+    },
+    "user_path": "danilolessa",
+    "team_path": null
+  }
+}

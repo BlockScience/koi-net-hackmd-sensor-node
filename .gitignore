@@ -41,3 +41,7 @@ dist/
 # OS/editor noise
 .DS_Store
 uv.lock
+
+.vscode/
+dropped_logs.txt
+repomix-output.xml

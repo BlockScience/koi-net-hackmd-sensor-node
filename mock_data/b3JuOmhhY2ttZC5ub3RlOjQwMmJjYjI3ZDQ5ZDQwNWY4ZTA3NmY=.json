@@ -1,0 +1,34 @@
+{
+  "manifest": {
+    "rid": "orn:hackmd.note:402bcb27d49d405f8e076f",
+    "timestamp": "2026-04-02T19:59:46.200331Z",
+    "sha256_hash": "d7db06c07da4779788638569333042254dee5c87d9909dc4cf2886b4b40e7e55"
+  },
+  "contents": {
+    "note_id": "402bcb27d49d405f8e076f",
+    "title": "Cryptoeconomic Specs: MycoFi Bonding Curves & Carbon Pricing",
+    "tags": [
+      "koi",
+      "research",
+      "blockscience"
+    ],
+    "created_at": 1777034791666,
+    "title_updated_at": 1777073602206,
+    "tags_updated_at": null,
+    "publish_type": "view",
+    "published_at": null,
+    "permalink": null,
+    "publish_link": "https://hackmd.io/@jessicazartler/wyHbHUrIJs",
+    "short_id": "wyHbHUrIJs",
+    "content": "# Cryptoeconomic Specs: MycoFi Bonding Curves & Carbon Pricing\n\n**Date**: August 09, 2026\n**Lead Author**: @jhackel (Jakob Hackel)\n**Contributors**: @phacker3 (Peter Hacker), @jshorish (Jamsheed)\n**Domain**: R&D / Economics\n\n## Overview\nThis document specifies the cryptoeconomic mechanisms required to launch the internal Web3 testnet for the BioFi ecosystem engagement. The goal is to price decentralized environmental sensor data feeds using an automated market maker (AMM) modeled after continuous bonding curves.\n\n## Mechanism Design\n**Peter Hacker** and I reviewed the token engineering specifications drafted last month. Because the supply of verifiable ecological data is heavily dependent on hardware lifecycles, a standard invariant formula fails.\n\nWe brought in **Jamsheed** (@jshorish) to apply general equilibrium theory to this problem. Jamsheed suggested utilizing a state-dependent asset pricing model—drawing on his recent structural modeling research—where the curve's reserve ratio dynamically adjusts based on the systemic risk of sensor failure.\n\n## Economic Modeling Framework\n\n**Jamsheed's Contribution**: Drawing on his research in computational economics and social network analysis, Jamsheed developed a stochastic asset pricing model that accounts for:\n\n1. **Hardware Failure Risk**: Sensor reliability coefficients derived from Carolina's stochastic optimization\n2. **Network Externalities**: How individual sensor failures impact the overall data mesh reliability\n3. **Dynamic Reserve Ratios**: State-dependent adjustments that prevent economic collapse during hardware stress events\n\n**Validation**: The model has been tested against historical ecological sensor data and shows robust performance even under simulated 30% sensor failure scenarios.\n\n## Implementation Handoff\nThe theoretical pricing model is complete. We need to validate the stochastic boundaries of this network. I have requested that the operations team spin up a repo for simulation.\n\n* **GitHub Simulation**: [bsci-mycofi-sim](https://github.com/BlockScience/bsci-mycofi-sim)\n* **Linked Model**: See `network_sim.py` for the combinatorial optimization logic.\n",
+    "last_changed_at": 1777073602206,
+    "last_change_user": {
+      "name": "Jessica Zartler",
+      "user_path": "jessicazartler",
+      "photo": "https://lh3.googleusercontent.com/a/9b9464c9-f732-44bd-8293-0fd126940eeb",
+      "biography": null
+    },
+    "user_path": "jessicazartler",
+    "team_path": null
+  }
+}

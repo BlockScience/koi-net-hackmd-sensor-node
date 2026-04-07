@@ -25,6 +25,9 @@ class HackMDEnvConfig(EnvConfig):
     HACKMD_BACKOFF_MAX_SECONDS: str = "HACKMD_BACKOFF_MAX_SECONDS"
     COORDINATOR_RID: str = "COORDINATOR_RID"
     COORDINATOR_URL: str = "COORDINATOR_URL"
+    # Mock data configuration
+    USE_MOCK_DATA: str = "USE_MOCK_DATA"
+    MOCK_DATA_PATH: str = "MOCK_DATA_PATH"
 
 class HackMDConfig(BaseModel):
     workspace_id: str | None = None
@@ -35,6 +38,10 @@ class HackMDConfig(BaseModel):
     retries: int = 3
     backoff_base_seconds: float = 1.0
     backoff_max_seconds: float = 10.0
+    # Mock data configuration
+    use_mock_data: bool = False
+    mock_data_path: str | None = None
+    mock_poll_interval_seconds: int = 60
 
 class HackMDSensorConfig(FullNodeConfig):
     hackmd: HackMDConfig = Field(default_factory=HackMDConfig)

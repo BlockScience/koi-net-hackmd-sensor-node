@@ -1,0 +1,34 @@
+{
+  "manifest": {
+    "rid": "orn:hackmd.note:7dec31056d7248569e84df",
+    "timestamp": "2026-04-02T19:59:46.200832Z",
+    "sha256_hash": "c613fcec96a7c855a9c58eb7db4e47fdb3cb6d2a3979bfa49eaf2302e05f709e"
+  },
+  "contents": {
+    "note_id": "7dec31056d7248569e84df",
+    "title": "Strategic R&D: Traditional Finance & Digital Governance Bridging",
+    "tags": [
+      "koi",
+      "research",
+      "blockscience"
+    ],
+    "created_at": 1780087295993,
+    "title_updated_at": 1780131295028,
+    "tags_updated_at": null,
+    "publish_type": "view",
+    "published_at": null,
+    "permalink": null,
+    "publish_link": "https://hackmd.io/@danfurfari/VnQ1KFbSbu",
+    "short_id": "VnQ1KFbSbu",
+    "content": "# Strategic R&D: Traditional Finance & Digital Governance Bridging\n\n**Date**: August 20, 2026\n**Lead Author**: @greg (Greg Johnson)\n**Contributors**: @IncompleteRules (Eric Alston), @lee0007 (Renee Maria Lee)\n**Domain**: Communications / Projects\n\n## Objective\nWhile our engineering teams are building the BioFi protocols natively for Web3, true planetary impact requires institutional capital. My work with the Bretton Woods Committee and digital asset strategy frameworks indicates that trad-fi institutions will not engage with ecological assets that lack clear legal and constitutional framing.\n\n## Governance Analysis\n**Eric Alston** is assisting in mapping out the institutional design of the MycoFi DAO. His comparative constitutional approach demonstrates how off-chain property rights (the actual land being monitored) intersect with on-chain tokenized carbon credits.\n\n## External Communications\nTo run a successful dual-track strategy:\n1. **Web3 Audience**: **Renee Maria Lee** is drawing on her DAO contributor experience (Aragon/Index Coop) to structure our community engagement strategy, ensuring we don't alienate our decentralized regenerative finance partners.\n2. **Trad-fi Audience**: I am preparing a policy briefing for the GBBC based on the outputs from our simulation models, validating that the network optimization minimizes counter-party risk.\n\n* **Docs Integration**: Send final synthesis to the Operations council for inclusion in the master SOW.\n",
+    "last_changed_at": 1780131295028,
+    "last_change_user": {
+      "name": "Dan Furfari",
+      "user_path": "danfurfari",
+      "photo": "https://lh3.googleusercontent.com/a/76c4a02c-ffc9-4868-831a-adba37731a1c",
+      "biography": null
+    },
+    "user_path": "danfurfari",
+    "team_path": null
+  }
+}
