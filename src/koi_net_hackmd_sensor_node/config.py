@@ -1,13 +1,14 @@
 import os
 
-from koi_net.config.full_node import (
+from koi_net.config import (
+    EnvConfig,
     FullNodeConfig,
+    FullNodeProfile,
     KoiNetConfig,
-    NodeProfile,
+    NodeContact,
     NodeProvides,
-    ServerConfig
+    ServerConfig,
 )
-from koi_net.config.core import EnvConfig, NodeContact
 from pydantic import BaseModel, Field, model_validator
 from rid_lib.types import KoiNetNode, HackMDNote
 
@@ -40,7 +41,7 @@ class HackMDSensorConfig(FullNodeConfig):
     server: ServerConfig = ServerConfig(port=8081)
     koi_net: KoiNetConfig = KoiNetConfig(
         node_name="hackmd_sensor",
-        node_profile=NodeProfile(
+        node_profile=FullNodeProfile(
             provides=NodeProvides(
                 event=[HackMDNote],
                 state=[HackMDNote, KoiNetNode]

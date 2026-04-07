@@ -1,34 +1,57 @@
-from koi_net.processor.context import HandlerContext
-from koi_net.processor.handler import STOP_CHAIN, HandlerType, KnowledgeHandler
-from koi_net.processor.knowledge_object import KnowledgeObject
-from rid_lib.types import HackMDNote, KoiNetNode
+from dataclasses import dataclass
+from typing import Any, TypeAlias
+
 import structlog
+from koi_net.components import (
+    Cache,
+    EventQueue,
+    KobjQueue,
+    NetworkGraph,
+    NetworkResolver,
+    NodeIdentity,
+    RequestHandler,
+)
+from koi_net.components.interfaces import HandlerType, KnowledgeHandler, STOP_CHAIN
+from koi_net.protocol.knowledge_object import KnowledgeObject
+from rid_lib.types import HackMDNote, KoiNetNode
 
 from .models import HackMDNoteObject
 
 log = structlog.stdlib.get_logger()
 
 
-@KnowledgeHandler.create(
-    HandlerType.Network,
-    rid_types=[KoiNetNode],
-)
+@dataclass
+class NodeHandler(KnowledgeHandler):
+    identity: NodeIdentity
+    cache: Cache
+    config: Any
+    event_queue: EventQueue
+    kobj_queue: KobjQueue
+    request_handler: RequestHandler
+    resolver: NetworkResolver
+    graph: NetworkGraph
+
+
+@dataclass
+class PrependNodeHandler(NodeHandler):
+    def __post_init__(self):
+        super().__post_init__()
+        if self in self.pipeline.knowledge_handlers:
+            self.pipeline.knowledge_handlers.remove(self)
+        self.pipeline.knowledge_handlers.insert(0, self)
+
+
+HandlerContext: TypeAlias = NodeHandler
+
+
 def suppress_peer_node_rebroadcast(ctx: HandlerContext, kobj: KnowledgeObject):
     """Prevent forwarding other nodes' identity events."""
     if kobj.source and kobj.source != ctx.identity.rid:
         return STOP_CHAIN
 
 
-@KnowledgeHandler.create(
-    HandlerType.Bundle,
-    rid_types=[HackMDNote]
-)
 def hackmd_bundle_handler(ctx: HandlerContext, kobj: KnowledgeObject):
-    """Validate and dedupe HackMD note bundles using `last_changed_at`.
-
-    If a previous bundle exists and the incoming `last_changed_at` is not strictly newer,
-    stop the handler chain to avoid redundant writes and broadcasts.
-    """
+    """Validate and dedupe HackMD note bundles using `last_changed_at`."""
     log.debug(
         "hackmd_bundle_handler: entry rid=%r event=%s source=%r",
         kobj.rid,
@@ -40,6 +63,7 @@ def hackmd_bundle_handler(ctx: HandlerContext, kobj: KnowledgeObject):
         hackmd_data = HackMDNoteObject.model_validate(kobj.contents or {})
     except Exception as e:
         import traceback
+
         log.warning(
             "Invalid HackMDNoteObject payload for %s: %s\nTRACE=\n%s",
             kobj.rid,
@@ -57,10 +81,12 @@ def hackmd_bundle_handler(ctx: HandlerContext, kobj: KnowledgeObject):
 
             if current_timestamp and prev_timestamp:
                 if current_timestamp <= prev_timestamp:
-                    log.debug("Skipping stale/no-op HackMDNote for %s (incoming <= cached)", kobj.rid)
+                    log.debug(
+                        "Skipping stale/no-op HackMDNote for %s (incoming <= cached)",
+                        kobj.rid,
+                    )
                     return STOP_CHAIN
         except Exception:
-            # If previous payload cannot be parsed, fall through and allow write
             pass
 
     log.debug(
@@ -69,27 +95,35 @@ def hackmd_bundle_handler(ctx: HandlerContext, kobj: KnowledgeObject):
         len(hackmd_data.content or ""),
     )
 
-# Intentionally omit auto-negotiation beyond KOI default handlers to keep
-# the sensor focused on emitting HackMDNote. Downstream consumers should
-# subscribe explicitly to this sensor's events.
 
-@KnowledgeHandler.create(
-    HandlerType.Final,
-    rid_types=[HackMDNote]
-)
 def logging_handler(ctx: HandlerContext, kobj: KnowledgeObject):
-    """Log processed knowledge objects"""
-    log.info(f"Processed {type(kobj.rid).__name__}: {kobj.rid}")
+    """Log processed knowledge objects."""
+    log.info("Processed %s: %s", type(kobj.rid).__name__, kobj.rid)
 
 
-# Export handlers for HackMDSensorNode class
-PREPEND_HANDLERS = [
-    suppress_peer_node_rebroadcast,
-]
+@dataclass
+class SuppressPeerNodeRebroadcastHandler(PrependNodeHandler):
+    handler_type = HandlerType.Network
+    rid_types = (KoiNetNode,)
 
-APPEND_HANDLERS = [
-    hackmd_bundle_handler,
-    logging_handler,
-]
+    def handle(self, kobj: KnowledgeObject):
+        return suppress_peer_node_rebroadcast(self, kobj)
 
-knowledge_handlers = PREPEND_HANDLERS + APPEND_HANDLERS
+
+@dataclass
+class HackMDBundleHandler(NodeHandler):
+    handler_type = HandlerType.Bundle
+    rid_types = (HackMDNote,)
+
+    def handle(self, kobj: KnowledgeObject):
+        return hackmd_bundle_handler(self, kobj)
+
+
+@dataclass
+class HackMDLoggingHandler(NodeHandler):
+    handler_type = HandlerType.Final
+    rid_types = (HackMDNote,)
+
+    def handle(self, kobj: KnowledgeObject):
+        return logging_handler(self, kobj)
+
