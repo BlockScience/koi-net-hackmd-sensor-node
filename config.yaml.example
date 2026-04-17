@@ -2,7 +2,7 @@ koi_net:
   node_name: hackmd_sensor
   node_rid:
   node_profile:
-    base_url: http://127.0.0.1:8001/koi-net
+    base_url: http://127.0.0.1:8081/koi-net
     node_type: FULL
     provides:
       event:
@@ -42,7 +42,7 @@ env:
 
 server:
   host: 127.0.0.1
-  port: 8001
+  port: 8081
   path: /koi-net
 
 hackmd:

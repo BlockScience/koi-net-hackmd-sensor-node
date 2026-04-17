@@ -1,0 +1,34 @@
+{
+  "manifest": {
+    "rid": "orn:hackmd.note:1ba9a49b68aa48c38c9fb5",
+    "timestamp": "2026-04-02T19:59:46.200594Z",
+    "sha256_hash": "608271ee9e8163f903d7af53ab8c138f033048749e49213523112ec0f73b8f97"
+  },
+  "contents": {
+    "note_id": "1ba9a49b68aa48c38c9fb5",
+    "title": "Model-Based Systems Engineering for LLM Pipelines in KOI",
+    "tags": [
+      "koi",
+      "research",
+      "blockscience"
+    ],
+    "created_at": 1773805021867,
+    "title_updated_at": 1773832842146,
+    "tags_updated_at": null,
+    "publish_type": "view",
+    "published_at": null,
+    "permalink": null,
+    "publish_link": "https://hackmd.io/@ericalston/1gOUO2mkNf",
+    "short_id": "1gOUO2mkNf",
+    "content": "# Model-Based Systems Engineering for LLM Pipelines in KOI\n\n**Date**: May 18, 2026\n**Lead Author**: @rororowyourboat (Rohan Mehta)\n**Contributors**: @ibenmeir (Ilan Ben-Meir), @jshorish (Jamsheed), @sayertindall (Sayer Tindall)\n**Domain**: Projects / Scientific Computing\n\n## Problem Statement\nWhen querying the internal BlockScience corpus via `koi-chat`, standard RAG pipelines struggle to preserve the semantic density of our multi-scale modeling research. The KOI protocol helps, but the LLM retrieval systems need an ontology that understands the difference between a cadCAD partial state update and an ethnographic field note.\n\n## System Workflow Design\nI am proposing an LLM-augmented workflow based on the research presented at EthCC Paris.\n1. **Parsing Module**: Extracts text.\n2. **Qualitative Verification**: Working with **Ilan Ben-Meir**, we've crafted an evaluation prompt suite to ensure the literary and narrative context of research (like Kelsie's DAO pieces) is maintained.\n3. **Economic Constraints**: **Jamsheed** provided constraints based on computational economics, ensuring our token pricing models for API queries are sustainable under network load.\n\n## Implementation details\nThis will integrate directly with Sayer's protocol. The LLM will route queries with tags `[Modeling & Simulation]` directly to cadCAD python file schemas (see `bsci-koi-bridge-demo`).\n\n* **Discussion**: [Slack #ai-workflows](https://blockscience.slack.com/archives/CAI889012/p1716039912)\n",
+    "last_changed_at": 1773832842146,
+    "last_change_user": {
+      "name": "Eric Alston",
+      "user_path": "ericalston",
+      "photo": "https://lh3.googleusercontent.com/a/e365f8a8-5137-4fa4-b655-08ad8e56842e",
+      "biography": null
+    },
+    "user_path": "ericalston",
+    "team_path": null
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "manifest": {
+    "rid": "orn:hackmd.note:230a7b282b0c4b3ebe6eae",
+    "timestamp": "2026-04-02T19:59:46.202853Z",
+    "sha256_hash": "86c5f4c18bc26e17a13002169b1d867a451366007d0af54cc6353ddf82e5c98e"
+  },
+  "contents": {
+    "note_id": "230a7b282b0c4b3ebe6eae",
+    "title": "Sensor Network Distributed Data Mesh Architecture",
+    "tags": [
+      "koi",
+      "research",
+      "blockscience"
+    ],
+    "created_at": 1774565607542,
+    "title_updated_at": 1774661737671,
+    "tags_updated_at": null,
+    "publish_type": "view",
+    "published_at": null,
+    "permalink": null,
+    "publish_link": "https://hackmd.io/@ericalston/v1Hh8UWqcu",
+    "short_id": "v1Hh8UWqcu",
+    "content": "# Sensor Network Distributed Data Mesh Architecture\n\n**Date**: August 14, 2026\n**Lead Author**: @davidfsol5 (David Sisson)\n**Contributors**: @lukvmil (Luke Miller), @JEJodesty (Joshua E. Jodesty)\n**Domain**: Projects / Systems Engineering\n\n## Architecture Overview\nThe scale of the incoming MycoFi sensor data is effectively equivalent to what I encountered in commercial pharmaceutical computational neuroscience—high volume, high noise, and deeply unstructured.\n\nTo prevent bottlenecking our scientific computing layers, we are deploying a domain-driven Data Mesh architecture.\n\n## Component Breakdown\n1. **Edge Node Ingestion**: Hardware sensors stream via MQTT.\n2. **Metagovernance Data Hooks**: **Luke Miller** is implementing data validation hooks utilizing the Metagovernance Project's libraries to verify node ownership identities prior to ingestion.\n3. **Data Pipeline**: **Joshua Jodesty** is porting over the scalable distributed system logic we traditionally use for massive cadCAD clusters to handle pipeline routing.\n\nThis ensures that when Amber's \"Calm Tech\" frontend requests a state update, the data mesh only delivers aggregated, noise-filtered indicators rather than the entire historical telemetry payload.\n\n## Quality Assurance & Reliability\n\n**Stephen Zargham** (@BSCI-Steve) has reviewed the data mesh architecture and is developing quality assurance protocols based on high-reliability engineering practices. Drawing on his experience leading Design Quality Assurance for safety-critical infrastructure, Steve is ensuring the sensor network meets institutional reliability standards.\n\n**Key QA Requirements**:\n- Fail-safe data ingestion pipelines\n- Automated validation of node identity verification\n- Circuit breaker patterns for cascading failure prevention\n- Comprehensive audit trails for all data transformations\n\n## Scalability Considerations\n\nThe data mesh design incorporates lessons from my pharmaceutical research experience, where we handled similarly noisy, high-volume computational neuroscience datasets. **Sayer Tindall** (@sayertindall) is advising on the KOI protocol integration to ensure all data artifacts are properly cataloged and searchable across the knowledge graph.\n\n* **Related**: [Slack #eng-data-mesh](https://blockscience.slack.com/archives/CQW9E22M/p1716892222)\n* **QA Review**: [Engineering Management Sign-off](#)\n",
+    "last_changed_at": 1774661737671,
+    "last_change_user": {
+      "name": "Eric Alston",
+      "user_path": "ericalston",
+      "photo": "https://lh3.googleusercontent.com/a/34be75c4-2e93-4685-89a1-d3fcaa80c235",
+      "biography": null
+    },
+    "user_path": "ericalston",
+    "team_path": null
+  }
+}

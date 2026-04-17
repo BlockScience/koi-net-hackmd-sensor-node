@@ -1,0 +1,34 @@
+{
+  "manifest": {
+    "rid": "orn:hackmd.note:8b440b4f01f04d458e2ac6",
+    "timestamp": "2026-04-02T19:59:46.199000Z",
+    "sha256_hash": "c476a5bd15a33108a94b725e50456d49c5006301c82feac402f7fafb74c23a82"
+  },
+  "contents": {
+    "note_id": "8b440b4f01f04d458e2ac6",
+    "title": "KOI Protocol: Bridge Research & Knowledge Organization Infrastructure",
+    "tags": [
+      "koi",
+      "research",
+      "blockscience"
+    ],
+    "created_at": 1778792221790,
+    "title_updated_at": 1778843813631,
+    "tags_updated_at": null,
+    "publish_type": "view",
+    "published_at": null,
+    "permalink": null,
+    "publish_link": "https://hackmd.io/@ericalston/JjV8PEBN9k",
+    "short_id": "JjV8PEBN9k",
+    "content": "# KOI Protocol: Bridge Research & Knowledge Organization Infrastructure\n\n**Date**: May 12, 2026\n**Lead Author**: @sayertindall (Sayer Tindall)\n**Contributors**: @davidfsol5 (David Sisson), @rororowyourboat (Rohan Mehta), @BSCI-Steve (Stephen Zargham)\n**Domain**: R&D / Software Development\n\n## Overview\nThis document outlines the architecture for the newly proposed Knowledge Organization Infrastructure (KOI) bridge, connecting BlockScience's internal knowledge graphs to client-facing research deliverables. As discussed in our [recent Slack thread](https://blockscience.slack.com/archives/C1A2B3C4D/p1712948293), the goal is to formalize the semantic relationships between raw model outputs and our ethnographic research.\n\n## Systems Engineering Context\nBuilding on the quality assurance practices established by **Steve Zargham**, this bridge requires high-reliability data pipelines. **David Sisson** has proposed a distributed data mesh architecture to handle the incoming metadata streams without blocking the primary simulation workers.\n\nSimultaneously, **Rohan Mehta** is developing the LLM information retrieval pipeline that will ingest these KOI artifacts to populate our vector stores.\n\n## Protocol Specifications\n1. **Entity Ingestion**: Automatically pulls markdown headers and code annotations from the `bsci-koi-bridge-demo` repository.\n2. **Metadata Tagging**: Leverages the expertise tagging system (e.g., *Modeling & Simulation*, *Ethnography*, *Systems Engineering*).\n3. **Graph Validation**: We will rely on cadCAD models to simulate the economic viability of the curation market within the KOI protocol.\n\n## Links & References\n* **Simulation Repo**: [github.com/BlockScience/bsci-koi-bridge-demo](https://github.com/BlockScience/bsci-koi-bridge-demo)\n* **Raw Testing Data**: [GDrive: KOI Network Simulation Outputs (Q2 2026)](#)\n* **Governance Integrations**: See Kelsie's notes on [Governance Mechanisms & Ethnographic Insights](governance-mechanisms-ethnography-dao.md)\n",
+    "last_changed_at": 1778843813631,
+    "last_change_user": {
+      "name": "Eric Alston",
+      "user_path": "ericalston",
+      "photo": "https://lh3.googleusercontent.com/a/ad5954bb-1e39-4684-87c6-d6704bbacd25",
+      "biography": null
+    },
+    "user_path": "ericalston",
+    "team_path": null
+  }
+}

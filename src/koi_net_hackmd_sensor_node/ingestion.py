@@ -11,6 +11,7 @@ import structlog
 from .config import HackMDSensorConfig
 from .hackmd_client import HackMDClient
 from .models import HackMDNoteObject
+from .mock_loader import HackMDMockLoader
 
 log = structlog.stdlib.get_logger()
 
@@ -79,6 +80,33 @@ class HackMDIngestionService:
         self._stop_event = threading.Event()
         self._thread: threading.Thread | None = None
 
+        # Mock data configuration
+        self.use_mock_data = self._resolve_bool(
+            env_value=getattr(config.env, "USE_MOCK_DATA", "") or "",
+            fallback=getattr(config.hackmd, "use_mock_data", False),
+        )
+        self.mock_data_path = self._resolve_optional_str(
+            env_value=getattr(config.env, "MOCK_DATA_PATH", "") or "",
+            fallback=getattr(config.hackmd, "mock_data_path", None),
+        )
+
+        # Override poll interval for mock mode
+        if self.use_mock_data:
+            self.poll_interval = self._resolve_int(
+                env_value=getattr(config.env, "HACKMD_POLL_INTERVAL_SECONDS", "") or "",
+                fallback=getattr(config.hackmd, "mock_poll_interval_seconds", 60),
+                label="HACKMD_POLL_INTERVAL_SECONDS",
+            )
+
+        # Initialize mock loader if enabled
+        self.mock_loader = None
+        if self.use_mock_data and self.mock_data_path:
+            self.mock_loader = HackMDMockLoader(
+                mock_data_path=self.mock_data_path,
+                kobj_queue=self.kobj_queue,
+                log=self.log,
+            )
+
     @staticmethod
     def _resolve_optional_str(env_value: str, fallback: str | None) -> str | None:
         env_value = (env_value or "").strip()
@@ -112,6 +140,16 @@ class HackMDIngestionService:
         except ValueError:
             log.warning("Invalid %s=%r, using fallback=%s", label, env_value, fallback)
             return fallback
+
+    @staticmethod
+    def _resolve_bool(env_value: str, fallback: bool) -> bool:
+        """Resolve boolean from environment variable."""
+        env_value = (env_value or "").strip().lower()
+        if env_value in ("true", "1", "yes"):
+            return True
+        if env_value in ("false", "0", "no"):
+            return False
+        return fallback
 
     @staticmethod
     def _resolve_float(env_value: str, fallback: float, label: str) -> float:
@@ -185,6 +223,10 @@ class HackMDIngestionService:
         self._thread = None
 
     def poll_once(self):
+        # Check if mock mode is enabled
+        if self.use_mock_data:
+            return self._poll_mock_data()
+
         self.log.info("Polling HackMD for notes...")
         notes = self.client.get_notes(limit=self.max_notes_per_poll)
 
@@ -242,3 +284,17 @@ class HackMDIngestionService:
             self.log.debug(f"Queued bundle for {note_rid}")
         except Exception as e:
             self.log.error(f"Failed to process note {note_rid}: {e}")
+
+    def _poll_mock_data(self):
+        """Poll mock data from local files instead of HackMD API."""
+        if not self.mock_loader:
+            self.log.warning("Mock mode enabled but no mock_loader configured")
+            return
+
+        self.log.info("Polling mock HackMD data...")
+        count = self.mock_loader.load_all()
+
+        if count:
+            self.log.info(f"Processed {count} mock HackMD notes")
+        else:
+            self.log.info("No mock HackMD notes to process")
