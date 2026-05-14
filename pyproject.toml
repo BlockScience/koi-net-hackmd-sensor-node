@@ -10,8 +10,8 @@ name = "koi-net-hackmd-sensor-node"
 version = "0.1.0"
 description = "KOI-net HackMD sensor node for content ingestion"
 authors = [
-    {name = "Luke Miller", email = "luke@block.science"},
-    {name = "Sayer Tindall", email = "sayer@block.science"}
+    {name = "Luke Miller", email = "luke@dynamicalsystemsgroup.com"},
+    {name = "Sayer Tindall", email = "sayer@dynamicalsystemsgroup.com"}
 ]
 
 readme = "README.md"
@@ -33,4 +33,4 @@ dependencies = [
 dev = ["twine>=6.0", "build", "pytest>=7.0", "pytest-mock>=3.10"]
 
 [project.urls]
-Homepage = "https://github.com/BlockScience/koi-net-hackmd-sensor-node"
+Homepage = "https://github.com/DynamicalSystemsGroup/koi-net-hackmd-sensor-node"
