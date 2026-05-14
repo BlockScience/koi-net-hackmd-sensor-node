@@ -10,7 +10,7 @@
     "tags": [
       "koi",
       "research",
-      "blockscience"
+      "dynamicalsystemsgroup"
     ],
     "created_at": 1773805021867,
     "title_updated_at": 1773832842146,
@@ -20,7 +20,7 @@
     "permalink": null,
     "publish_link": "https://hackmd.io/@ericalston/1gOUO2mkNf",
     "short_id": "1gOUO2mkNf",
-    "content": "# Model-Based Systems Engineering for LLM Pipelines in KOI\n\n**Date**: May 18, 2026\n**Lead Author**: @rororowyourboat (Rohan Mehta)\n**Contributors**: @ibenmeir (Ilan Ben-Meir), @jshorish (Jamsheed), @sayertindall (Sayer Tindall)\n**Domain**: Projects / Scientific Computing\n\n## Problem Statement\nWhen querying the internal BlockScience corpus via `koi-chat`, standard RAG pipelines struggle to preserve the semantic density of our multi-scale modeling research. The KOI protocol helps, but the LLM retrieval systems need an ontology that understands the difference between a cadCAD partial state update and an ethnographic field note.\n\n## System Workflow Design\nI am proposing an LLM-augmented workflow based on the research presented at EthCC Paris.\n1. **Parsing Module**: Extracts text.\n2. **Qualitative Verification**: Working with **Ilan Ben-Meir**, we've crafted an evaluation prompt suite to ensure the literary and narrative context of research (like Kelsie's DAO pieces) is maintained.\n3. **Economic Constraints**: **Jamsheed** provided constraints based on computational economics, ensuring our token pricing models for API queries are sustainable under network load.\n\n## Implementation details\nThis will integrate directly with Sayer's protocol. The LLM will route queries with tags `[Modeling & Simulation]` directly to cadCAD python file schemas (see `bsci-koi-bridge-demo`).\n\n* **Discussion**: [Slack #ai-workflows](https://blockscience.slack.com/archives/CAI889012/p1716039912)\n",
+    "content": "# Model-Based Systems Engineering for LLM Pipelines in KOI\n\n**Date**: May 18, 2026\n**Lead Author**: @rororowyourboat (Rohan Mehta)\n**Contributors**: @ibenmeir (Ilan Ben-Meir), @jshorish (Jamsheed), @sayertindall (Sayer Tindall)\n**Domain**: Projects / Scientific Computing\n\n## Problem Statement\nWhen querying the internal DynamicalSystemsGroup corpus via `koi-chat`, standard RAG pipelines struggle to preserve the semantic density of our multi-scale modeling research. The KOI protocol helps, but the LLM retrieval systems need an ontology that understands the difference between a cadCAD partial state update and an ethnographic field note.\n\n## System Workflow Design\nI am proposing an LLM-augmented workflow based on the research presented at EthCC Paris.\n1. **Parsing Module**: Extracts text.\n2. **Qualitative Verification**: Working with **Ilan Ben-Meir**, we've crafted an evaluation prompt suite to ensure the literary and narrative context of research (like Kelsie's DAO pieces) is maintained.\n3. **Economic Constraints**: **Jamsheed** provided constraints based on computational economics, ensuring our token pricing models for API queries are sustainable under network load.\n\n## Implementation details\nThis will integrate directly with Sayer's protocol. The LLM will route queries with tags `[Modeling & Simulation]` directly to cadCAD python file schemas (see `bsci-koi-bridge-demo`).\n\n* **Discussion**: [Slack #ai-workflows](https://dynamicalsystemsgroup.slack.com/archives/CAI889012/p1716039912)\n",
     "last_changed_at": 1773832842146,
     "last_change_user": {
       "name": "Eric Alston",
